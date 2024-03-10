@@ -1,5 +1,8 @@
+package test.tests;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import main.java.Calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
