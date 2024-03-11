@@ -6,9 +6,12 @@ import java.util.List;
 public class Lexer {
     private Reader reader;
     private String currentStrToken;
-    private List<Character> separators = Arrays.asList(new Character[]{' ', '\n', '\t', '\r', '\f', '\b', '\0',
-        '(', ')', '{', '}', '[', ']', ';', ',', '.', ':', '#', '%', '^',
-        '&', '*', '-', '+', '=', '|', '<', '>', '/', '\\', '!', '"', '\'', '`'});
+    private final List<Character> singleSeparators = Arrays.asList(new Character[]{' ', '\n', '\t', '\r', '\f', '\b',
+            '(', ')', '{', '}', '[', ']', ';', ',', '.', ':', '#', '%', '^',
+            '*', '\\', '!', '"', '\'', '`'});
+
+    private final List<Character> doubleSeparators = Arrays.asList(new Character[]{'+', '-', '>', '<', '=', '&', '|', '/'});
+
 
     public Lexer(Reader reader) {
         this.reader = reader;
@@ -19,13 +22,32 @@ public class Lexer {
         Character ch = reader.getCurrentChar();
         int startingColumn = reader.getCurrentColumn();
 
-        if(separators.contains(ch)){
+        if (singleSeparators.contains(ch)) {
             reader.nextChar();
             return new LexerToken(TokenID.NONE, ch.toString(),
                     reader.getCurrentLine(), startingColumn);
+        } else {
+            if (doubleSeparators.contains(ch)) {
+                //TODO: Verificar el siguiente simbolo y armar token
+                return new LexerToken(TokenID.NONE, ch.toString(),
+                        reader.getCurrentLine(), startingColumn);
+            }
+            else{
+                //TODO: Checkear la apariencia de un comentario
+                if(ch == '/'){
+                    reader.nextChar();
+                    ch= reader.getCurrentChar();
+                    if(ch=='?'){
+                        while(ch!='\n'){
+                            reader.nextChar();
+                            ch= reader.getCurrentChar();
+                        }
+                    }
+                }
+            }
         }
 
-        while (!separators.contains(ch)) {
+        while (!singleSeparators.contains(ch)) {
             reader.nextChar();
             currentToken.append(ch);
             ch = reader.getCurrentChar();
