@@ -1,7 +1,6 @@
 import reader.Reader;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Lexer {
     private Reader reader;
@@ -10,8 +9,13 @@ public class Lexer {
             '(', ')', '{', '}', '[', ']', ';', ',', '.', ':', '#', '%', '^',
             '*', '\\', '!', '"', '\'', '`'});
 
-    private final List<Character> doubleSeparators = Arrays.asList(new Character[]{'+', '-', '>', '<', '=', '&', '|', '/'});
+    private final List<Character> doubleSeparators = Arrays.asList(new Character[]{'+', '-', '>', '<', '=', '&', '|'});
 
+    Map<String, String> myMap = new HashMap<String, String>() {{
+        put("foo", "bar");
+        put("key", "value");
+        //etc
+    }};
 
     public Lexer(Reader reader) {
         this.reader = reader;

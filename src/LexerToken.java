@@ -10,4 +10,9 @@ public class LexerToken {
         this.line = line;
         this.column = column;
     }
+
+    @Override
+    public String toString() {
+        return tokenID.name() + ", " + lexeme + ", Line: " + line + ", Column: " + column + "\n";
+    }
 }
