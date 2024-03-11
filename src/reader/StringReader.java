@@ -6,7 +6,12 @@ public class StringReader extends Reader{
     }
 
     @Override
-    public Character getNextChar() {
+    public void nextChar() {
+
+    }
+
+    @Override
+    public Character getCurrentChar() {
         return null;
     }
 }

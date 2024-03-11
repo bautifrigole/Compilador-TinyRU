@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class FileReader extends Reader {
     private Scanner scanner;
-    private int currentIndex = 0;
     private String line = "";
 
     public FileReader(String path) {
@@ -20,22 +19,29 @@ public class FileReader extends Reader {
     }
 
     @Override
-    public Character getNextChar() {
-
-        if (currentIndex < line.length()) {
-            Character nextChar = line.charAt(currentIndex);
-            currentIndex++;
-            return nextChar;
+    public void nextChar() {
+        if (getCurrentColumn() < line.length()) {
+            incrementCurrentColumnByOne();
         } else {
             if (scanner.hasNextLine()) {
                 line = scanner.nextLine();
-                currentIndex = 0;
+                incrementCurrentLineByOne();
+                setCurrentColumn(0);
+            }
+        }
+    }
+
+    @Override
+    public Character getCurrentChar() {
+        if (getCurrentColumn() < line.length()) {
+            return line.charAt(getCurrentColumn());
+        } else {
+            if (scanner.hasNextLine()) {
+                // TODO: '\r\n' in Windows
+                return '\n';
             } else {
                 return null;
             }
         }
-
-
-        return ' ';
     }
 }

@@ -1,4 +1,5 @@
 public enum TokenID {
+    NONE,
     // Keywords
     TOKEN_KW_STRUCT,
     TOKEN_KW_IMPL,

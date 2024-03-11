@@ -1,5 +1,4 @@
 import reader.FileReader;
-
 import java.io.File;
 
 public class Main {
@@ -7,8 +6,16 @@ public class Main {
         if (args.length > 0) {
             try {
                 File file = new File(args[0]);
+                Lexer lexer = new Lexer(new FileReader(file.getPath()));
+                LexerToken lexerToken = lexer.getNextToken();
+
+                while(lexerToken != null) {
+                    System.out.println(lexerToken);
+                    lexerToken = lexer.getNextToken();
+                }
             }
             catch (Exception e) {
+                // TODO: Throw exception
                 System.out.println("File not found");
             }
 
@@ -16,14 +23,12 @@ public class Main {
                 // TODO: Implement output file
                 File outputFile = new File(args[1]);
             }
-
         }
         else {
+            // TODO: Throw exception
             System.out.println("No file provided");
         }
 
-        File file = new File("src/test/tests/fibonacci.ru");
-        Lexer lexer = new Lexer(new FileReader(file.getPath()));
-        lexer.getNextToken();
+        // TODO: Save result in outputFile if it isn't null
     }
 }
