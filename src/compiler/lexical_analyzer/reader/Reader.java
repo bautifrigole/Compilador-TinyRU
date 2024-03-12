@@ -4,7 +4,6 @@ package compiler.lexical_analyzer.reader;
  * Clase encargada de leer caracteres desde una fuente.
  */
 public abstract class Reader {
-    private String inputContent;
     private int currentLine = 0;
     private int currentColumn = 0;
 
@@ -64,8 +63,4 @@ public abstract class Reader {
      * @return Character con el carácter actual
      */
     public abstract Character getCurrentChar();
-
-    public void setInputContent(String inputContent){
-        this.inputContent = inputContent;
-    }
 }

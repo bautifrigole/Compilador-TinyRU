@@ -3,7 +3,7 @@ package compiler.lexical_analyzer.reader;
 import java.io.File;
 import java.util.Scanner;
 
-/*
+/**
  * Clase encargada de leer caracteres desde un archivo fuente.
  */
 public class FileReader extends Reader {
