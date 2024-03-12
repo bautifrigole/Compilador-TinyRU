@@ -39,6 +39,7 @@ public class TokenIDDictionary {
 
     static {
         // Keywords
+
         tokenStrMap.put("struct", TokenID.TOKEN_KW_STRUCT);
         tokenStrMap.put("impl", TokenID.TOKEN_KW_IMPL);
         tokenStrMap.put("else", TokenID.TOKEN_KW_ELSE);
