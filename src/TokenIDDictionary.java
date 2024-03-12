@@ -29,7 +29,7 @@ public class TokenIDDictionary {
         tokenCharMap.put(';', TokenID.TOKEN_SEMICOLON);
 
         // Characters
-        tokenCharMap.put('\n', TokenID.TOKEN_NEWLINE);
+        // tokenCharMap.put('\n', TokenID.TOKEN_NEWLINE);
         tokenCharMap.put('\t', TokenID.TOKEN_TAB);
         tokenCharMap.put('v', TokenID.TOKEN_VERTICALTAB);
         tokenCharMap.put('\r', TokenID.TOKEN_CARRIAGERETURN);
@@ -66,6 +66,7 @@ public class TokenIDDictionary {
         tokenStrMap.put("=", TokenID.TOKEN_OP_ASSIGN);
         tokenStrMap.put("++", TokenID.TOKEN_OP_DOUBLEPLUS);
         tokenStrMap.put("--", TokenID.TOKEN_OP_DOUBLEMINUS);
+        tokenStrMap.put("->", TokenID.TOKEN_OP_ARROW);
 
         // Types
         tokenStrMap.put("int", TokenID.TOKEN_TYPE_INT);

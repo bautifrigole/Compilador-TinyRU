@@ -38,6 +38,7 @@ public enum TokenID {
     TOKEN_OP_ASSIGN,
     TOKEN_OP_DOUBLEPLUS,
     TOKEN_OP_DOUBLEMINUS,
+    TOKEN_OP_ARROW,
 
 
     // Types

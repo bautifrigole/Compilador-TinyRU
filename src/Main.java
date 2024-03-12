@@ -17,6 +17,7 @@ public class Main {
             catch (Exception e) {
                 // TODO: Throw exception
                 System.out.println("File not found");
+                System.out.print(e);
             }
 
             if (args.length > 1) {
