@@ -1,7 +1,10 @@
 import reader.FileReader;
 import java.io.File;
 
-public class Main {
+/**
+ * Clase encargada de ejecutar llamados a Lexer para que éste busque el siguiente token en su fuente.
+ */
+public class Executor {
     public static void main(String[] args) {
         if (args.length > 0) {
             try {

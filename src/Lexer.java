@@ -2,17 +2,26 @@ import reader.Reader;
 
 import java.util.*;
 
+/**
+ * Clase encargada de realizar el análisis léxico.
+ */
 public class Lexer {
     private Reader reader;
     private String currentStrToken;
-
     private boolean isStringOpen = false;
+
+    /**
+     * Constructor de la clase.
+     * @param reader Reader de dónde se irán solicitando los caracteres a analizar
+     */
     public Lexer(Reader reader) {
         this.reader = reader;
     }
 
-
-
+    /**
+     * Busca el siguiente token a formar en el código fuente.
+     * @return LexerToken con la información del siguiente token
+     */
     public LexerToken getNextToken() {
         StringBuilder currentToken = new StringBuilder();
         Character ch = reader.getCurrentChar();
@@ -57,7 +66,6 @@ public class Lexer {
                                 ch = reader.getCurrentChar();
                             }
                             reader.nextChar();
-                            ch = reader.getCurrentChar();
                             return getNextToken();
                         }
                         else{
@@ -65,16 +73,11 @@ public class Lexer {
                             return new LexerToken(TokenIDDictionary.getTokenStrID(currentToken.toString()), currentToken.toString(),
                                     reader.getCurrentLine(), startingColumn);
                         }
-
                     }
 
                     return new LexerToken(TokenIDDictionary.getTokenCharID(ch), ch.toString(),
                             reader.getCurrentLine(), startingColumn);
-
                 }
-
-
-
             }
         }
 
@@ -89,12 +92,9 @@ public class Lexer {
                     //TODO: Tirar error y parar ejecución (Falta cerrar comillas)
                 }
                 isStringOpen = ch != '"';
-
             }
             currentToken.append(ch);
             reader.nextChar();
-            ch = reader.getCurrentChar();
-
         }
         else{
             while (!TokenSeparator.isSeparator(ch) && ch!=' ') {
@@ -103,10 +103,6 @@ public class Lexer {
                 ch = reader.getCurrentChar();
             }
         }
-
-
-
-
 
         return new LexerToken(TokenID.NONE, currentToken.toString(),
                 reader.getCurrentLine(), startingColumn);

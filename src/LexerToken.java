@@ -1,3 +1,6 @@
+/*
+ * Clase encargada de almacenar la información de un token: su ID, su lexema y su ubicación en el código fuente.
+ */
 public class LexerToken {
     private TokenID tokenID;
     private String lexeme;

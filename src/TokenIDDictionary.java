@@ -1,6 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+ * Clase encargada de almacenar los tokens junto con su ID.
+ */
 public class TokenIDDictionary {
     private static final Map<Character, TokenID> tokenCharMap = new HashMap<>();
 
@@ -39,8 +42,6 @@ public class TokenIDDictionary {
 
     static {
         // Keywords
-
-
         tokenStrMap.put("struct", TokenID.TOKEN_KW_STRUCT);
         tokenStrMap.put("impl", TokenID.TOKEN_KW_IMPL);
         tokenStrMap.put("else", TokenID.TOKEN_KW_ELSE);
@@ -81,10 +82,20 @@ public class TokenIDDictionary {
         tokenStrMap.put("array", TokenID.TOKEN_TYPE_ARRAY);
     }
 
+    /**
+     * Busca el ID de la key especificada.
+     * @param key Character a buscar su ID
+     * @return TokenID del Character especificado
+     */
     public static TokenID getTokenCharID(Character key) {
         return tokenCharMap.get(key);
     }
 
+    /**
+     * Busca el ID de la key especificada.
+     * @param key String a buscar su ID
+     * @return TokenID del String especificado
+     */
     public static TokenID getTokenStrID(String key) {
         return tokenStrMap.get(key);
     }

@@ -1,10 +1,10 @@
 import java.util.Arrays;
 import java.util.List;
 
+/*
+ * Clase encargada de reconocer las cadenas y caracteres que separan a los tokens.
+ */
 public class TokenSeparator {
-
-
-
     public static final List<Character> singleSeparators = Arrays.asList(new Character[]{ '\t', '\r', '\f', '\b',
             '(', ')', '{', '}', '[', ']', ';', ',', '.', ':', '#', '%', '^',
             '*', '\\', '!', '\'', '`'});
@@ -12,24 +12,27 @@ public class TokenSeparator {
 
     public static final List<Character> doubleSeparators = Arrays.asList(new Character[]{ '&', '|'});
 
-    // Se retornan las posibles continuaciones de algunos simbolos para armar tokens
+    /**
+     * Devuelve las posibles continuaciones de un carácter para armar tokens.
+     * @param key Character a buscar sus posibles continuaciones
+     * @return List<Character> con todos los posibles caracteres
+     */
     public static List<Character> getSepContinuation(Character key) {
-        switch(key){
-            case '+':
-                return Arrays.asList(new Character[]{'+'});
-            case '-':
-                return Arrays.asList(new Character[]{'-','>'});
-            case '>', '!', '<', '=':
-                return Arrays.asList(new Character[]{'='});
-            case '/':
-                return Arrays.asList(new Character[]{'?'});
-        }
-        return null;
-
+        return switch (key) {
+            case '+' -> Arrays.asList(new Character[]{'+'});
+            case '-' -> Arrays.asList(new Character[]{'-', '>'});
+            case '>', '!', '<', '=' -> Arrays.asList(new Character[]{'='});
+            case '/' -> Arrays.asList(new Character[]{'?'});
+            default -> null;
+        };
     }
 
-    // Se retorna True si es un posible separador
-    public static Boolean isSeparator(Character key){
+    /**
+     * Indica si un determinado carácter es un separador
+     * @param key Character a analizar si es un separador
+     * @return boolean que indica si es separador
+     */
+    public static boolean isSeparator(Character key){
         return singleSeparators.contains(key) || singleOrDoubleSeparators.contains(key) || doubleSeparators.contains(key);
     }
 

@@ -1,3 +1,6 @@
+/*
+ * Enum con todos los posibles valores del ID de un token.
+ */
 public enum TokenID {
     NONE,
     // Keywords
@@ -69,6 +72,4 @@ public enum TokenID {
     TOKEN_COLON,
     TOKEN_SEMICOLON,
     TOKEN_EOF,
-
-
 }
