@@ -1,4 +1,4 @@
-package reader;
+package compiler.lexical_analyzer.reader;
 
 import java.io.File;
 import java.util.Scanner;

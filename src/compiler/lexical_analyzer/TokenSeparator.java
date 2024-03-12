@@ -1,7 +1,9 @@
+package compiler.lexical_analyzer;
+
 import java.util.Arrays;
 import java.util.List;
 
-/*
+/**
  * Clase encargada de reconocer las cadenas y caracteres que separan a los tokens.
  */
 public class TokenSeparator {
@@ -15,7 +17,7 @@ public class TokenSeparator {
     /**
      * Devuelve las posibles continuaciones de un carácter para armar tokens.
      * @param key Character a buscar sus posibles continuaciones
-     * @return List<Character> con todos los posibles caracteres
+     * @return List de Character con todos los posibles caracteres
      */
     public static List<Character> getSepContinuation(Character key) {
         return switch (key) {

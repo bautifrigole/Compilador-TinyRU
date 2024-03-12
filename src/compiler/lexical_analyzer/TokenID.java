@@ -1,3 +1,5 @@
+package compiler.lexical_analyzer;
+
 /*
  * Enum con todos los posibles valores del ID de un token.
  */

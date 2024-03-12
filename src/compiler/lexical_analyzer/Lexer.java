@@ -1,4 +1,6 @@
-import reader.Reader;
+package compiler.lexical_analyzer;
+
+import compiler.lexical_analyzer.reader.Reader;
 
 import java.util.*;
 
@@ -20,7 +22,7 @@ public class Lexer {
 
     /**
      * Busca el siguiente token a formar en el código fuente.
-     * @return LexerToken con la información del siguiente token
+     * @return compiler.lexical_analyzer.LexerToken con la información del siguiente token
      */
     public LexerToken getNextToken() {
         StringBuilder currentToken = new StringBuilder();

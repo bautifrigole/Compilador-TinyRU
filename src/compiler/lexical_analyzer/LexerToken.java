@@ -1,3 +1,5 @@
+package compiler.lexical_analyzer;
+
 /*
  * Clase encargada de almacenar la información de un token: su ID, su lexema y su ubicación en el código fuente.
  */

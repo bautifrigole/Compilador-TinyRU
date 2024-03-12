@@ -1,4 +1,4 @@
-package main.java;
+package calculator.java;
 
 import java.util.stream.DoubleStream;
 

@@ -1,4 +1,4 @@
-package reader;
+package compiler.lexical_analyzer.reader;
 
 /*
  * Clase encargada de leer caracteres desde un String fuente.

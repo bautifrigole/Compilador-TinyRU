@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import main.java.Calculator;
+import calculator.java.Calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 

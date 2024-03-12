@@ -1,3 +1,5 @@
+package compiler.lexical_analyzer;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +34,7 @@ public class TokenIDDictionary {
         tokenCharMap.put(';', TokenID.TOKEN_SEMICOLON);
 
         // Characters
-        // tokenCharMap.put('\n', TokenID.TOKEN_NEWLINE);
+        // tokenCharMap.put('\n', compiler.lexical_analyzer.TokenID.TOKEN_NEWLINE);
         tokenCharMap.put('\t', TokenID.TOKEN_TAB);
         tokenCharMap.put('v', TokenID.TOKEN_VERTICALTAB);
         tokenCharMap.put('\r', TokenID.TOKEN_CARRIAGERETURN);
@@ -85,7 +87,7 @@ public class TokenIDDictionary {
     /**
      * Busca el ID de la key especificada.
      * @param key Character a buscar su ID
-     * @return TokenID del Character especificado
+     * @return compiler.lexical_analyzer.TokenID del Character especificado
      */
     public static TokenID getTokenCharID(Character key) {
         return tokenCharMap.get(key);
@@ -94,7 +96,7 @@ public class TokenIDDictionary {
     /**
      * Busca el ID de la key especificada.
      * @param key String a buscar su ID
-     * @return TokenID del String especificado
+     * @return compiler.lexical_analyzer.TokenID del String especificado
      */
     public static TokenID getTokenStrID(String key) {
         return tokenStrMap.get(key);

@@ -1,10 +1,17 @@
-import reader.FileReader;
+package compiler.lexical_analyzer;
+
+import compiler.lexical_analyzer.reader.FileReader;
 import java.io.File;
 
 /**
  * Clase encargada de ejecutar llamados a Lexer para que éste busque el siguiente token en su fuente.
  */
 public class Executor {
+
+    /**
+     * Método main.
+     * @param args de main
+     */
     public static void main(String[] args) {
         if (args.length > 0) {
             try {
