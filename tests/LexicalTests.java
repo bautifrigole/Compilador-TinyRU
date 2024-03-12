@@ -1,13 +1,14 @@
+import calculator.java.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import calculator.java.Calculator;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CalculatorTest {
+class LexicalTests {
 
     @Test
-    @DisplayName("")
+    @DisplayName("Correct Token for Operators")
     void add() {
         assertEquals(4, Calculator.add(2, 2));
     }

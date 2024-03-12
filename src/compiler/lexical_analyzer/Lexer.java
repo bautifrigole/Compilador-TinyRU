@@ -9,7 +9,6 @@ import java.util.*;
  */
 public class Lexer {
     private Reader reader;
-    private String currentStrToken;
     private boolean isStringOpen = false;
 
     /**
@@ -37,7 +36,7 @@ public class Lexer {
 
         if (TokenSeparator.singleSeparators.contains(ch)) {
             reader.nextChar();
-            TokenID tokenID = TokenIDDictionary.getTokenCharID(ch);
+            TokenID tokenID = TokenClassifier.getTokenCharID(ch);
             return new LexerToken(tokenID, ch.toString(),
                     reader.getCurrentLine(), startingColumn);
         } else {
@@ -46,7 +45,7 @@ public class Lexer {
                 Character nextCh = reader.getCurrentChar();
                 if (ch == nextCh){
                     currentToken.append(ch + nextCh);
-                    return new LexerToken(TokenIDDictionary.getTokenStrID(currentToken.toString()), currentToken.toString(),
+                    return new LexerToken(TokenClassifier.getTokenStrID(currentToken.toString()), currentToken.toString(),
                             reader.getCurrentLine(), startingColumn);
                 }else{
                     //TODO: Tirar error y parar ejecución (Falta de caracter)
@@ -72,12 +71,12 @@ public class Lexer {
                         }
                         else{
                             reader.nextChar();
-                            return new LexerToken(TokenIDDictionary.getTokenStrID(currentToken.toString()), currentToken.toString(),
+                            return new LexerToken(TokenClassifier.getTokenStrID(currentToken.toString()), currentToken.toString(),
                                     reader.getCurrentLine(), startingColumn);
                         }
                     }
 
-                    return new LexerToken(TokenIDDictionary.getTokenCharID(ch), ch.toString(),
+                    return new LexerToken(TokenClassifier.getTokenCharID(ch), ch.toString(),
                             reader.getCurrentLine(), startingColumn);
                 }
             }
@@ -89,6 +88,18 @@ public class Lexer {
                 currentToken.append(ch);
                 reader.nextChar();
                 ch = reader.getCurrentChar();
+                if(ch=='\\'){
+                    reader.nextChar();
+                    ch = reader.getCurrentChar();
+                    if(ch=='0'){
+
+                    System.out.println("Caracter inválido");
+                    //TODO: Tirar error y parar ejecución (Caracter inválido)
+                    }
+                    else{
+                        currentToken.append(ch);
+                    }
+                }
                 if (ch == null || ch==(char)-1){
                     System.out.println("No se cerró comillas");
                     //TODO: Tirar error y parar ejecución (Falta cerrar comillas)

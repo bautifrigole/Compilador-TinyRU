@@ -9,7 +9,7 @@ import java.util.List;
 public class TokenSeparator {
     public static final List<Character> singleSeparators = Arrays.asList(new Character[]{ '\t', '\r', '\f', '\b',
             '(', ')', '{', '}', '[', ']', ';', ',', '.', ':', '#', '%', '^',
-            '*', '\\', '!', '\'', '`'});
+            '*', '!', '\'', '`'});
     public static final List<Character> singleOrDoubleSeparators = Arrays.asList(new Character[]{'+', '-', '>', '<', '=', '!', '/'});
 
     public static final List<Character> doubleSeparators = Arrays.asList(new Character[]{ '&', '|'});

@@ -6,8 +6,9 @@ import java.util.Map;
 /*
  * Clase encargada de almacenar los tokens junto con su ID.
  */
-public class TokenIDDictionary {
+public class TokenClassifier {
     private static final Map<Character, TokenID> tokenCharMap = new HashMap<>();
+    //TODO: Lista de palabras reservadas
 
     static {
         // Operators
@@ -87,7 +88,7 @@ public class TokenIDDictionary {
     /**
      * Busca el ID de la key especificada.
      * @param key Character a buscar su ID
-     * @return compiler.lexical_analyzer.TokenID del Character especificado
+     * @return TokenID del Character especificado
      */
     public static TokenID getTokenCharID(Character key) {
         return tokenCharMap.get(key);
@@ -96,10 +97,17 @@ public class TokenIDDictionary {
     /**
      * Busca el ID de la key especificada.
      * @param key String a buscar su ID
-     * @return compiler.lexical_analyzer.TokenID del String especificado
+     * @return TokenID del String especificado
      */
     public static TokenID getTokenStrID(String key) {
         return tokenStrMap.get(key);
     }
+
+    //TODO: isKeyWord()
+    //TODO: isObjectIdentifier()
+    //TODO: isClassIdentifier()
+    //TODO: isNumberIdentifier()
+    //TODO: isStringIdentifier()
+
 }
 
