@@ -26,8 +26,7 @@ public class Executor {
             }
             catch (Exception e) {
                 // TODO: Throw exception
-                System.out.println("File not found");
-                System.out.print(e);
+                System.out.print(e.toString());
             }
 
             if (args.length > 1) {
