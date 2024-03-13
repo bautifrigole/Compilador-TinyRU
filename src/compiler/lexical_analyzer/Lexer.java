@@ -1,5 +1,8 @@
 package compiler.lexical_analyzer;
 
+import compiler.exceptions.lexical_exceptions.LexicalException;
+import compiler.exceptions.lexical_exceptions.MissingOperationCharacter;
+import compiler.exceptions.lexical_exceptions.UnclosedStrException;
 import compiler.lexical_analyzer.reader.Reader;
 import java.util.*;
 
@@ -21,12 +24,18 @@ public class Lexer {
     }
 
     /**
+     * @author Bautista Frigolé
      * Busca el siguiente token a formar en el código fuente.
      * @return compiler.lexical_analyzer.LexerToken con la información del siguiente token
      */
-    public LexerToken getNextToken() {
+    public LexerToken getNextToken() throws LexicalException {
         currentToken = new StringBuilder();
         Character ch = reader.getCurrentChar();
+
+        if (ch == null) {
+            return new LexerToken(TokenID.TOKEN_EOF, null,
+                    reader.getCurrentLine(), tokenStartingColumn);
+        }
 
         while(ch==' ' || ch=='\n'){
             reader.nextChar();
@@ -57,7 +66,7 @@ public class Lexer {
             reader.nextChar();
         }
         else{
-            while (!TokenSeparator.isSeparator(ch) && ch!=' ') {
+            while (!TokenSeparator.isSeparator(ch) && ch!=' ' && ch!='\n') {
                 currentToken.append(ch);
                 reader.nextChar();
                 ch = reader.getCurrentChar();
@@ -75,21 +84,21 @@ public class Lexer {
                 reader.getCurrentLine(), tokenStartingColumn);
     }
 
-    private LexerToken getDoubleLexerToken(Character ch) {
+    private LexerToken getDoubleLexerToken(Character ch) throws MissingOperationCharacter {
         reader.nextChar();
         Character nextCh = reader.getCurrentChar();
         if (ch == nextCh){
-            currentToken.append(ch + nextCh);
+            reader.nextChar();
+            currentToken.append(ch);
+            currentToken.append(nextCh);
             return new LexerToken(TokenClassifier.getTokenStrID(currentToken.toString()), currentToken.toString(),
                     reader.getCurrentLine(), tokenStartingColumn);
         }else{
-            //TODO: Tirar error y parar ejecución (Falta de caracter)
-            System.out.println("Falta caracter: " + ch);
+            throw new MissingOperationCharacter(reader.getCurrentLine(), tokenStartingColumn, ch, ch);
         }
-        return null;
     }
 
-    private LexerToken getSingleOrDoubleLexerToken(Character ch) {
+    private LexerToken getSingleOrDoubleLexerToken(Character ch) throws LexicalException {
         currentToken.append(ch);
         reader.nextChar();
         Character nextCh = reader.getCurrentChar();
@@ -116,16 +125,17 @@ public class Lexer {
                 reader.getCurrentLine(), tokenStartingColumn);
     }
 
-    private Character getStringContent(Character ch) {
+    private Character getStringContent(Character ch) throws UnclosedStrException {
         currentToken.append(ch);
         reader.nextChar();
         ch = reader.getCurrentChar();
 
         if (ch == null || ch == (char)-1){
-            System.out.println("No se cerró comillas");
-            //TODO: Tirar error y parar ejecución (Falta cerrar comillas)
+            throw new UnclosedStrException(reader.getCurrentLine(), tokenStartingColumn);
         }
         else {
+            //TODO: Chequear si ch es un carácter de nuestro alfabeto
+
             if (ch == '\\') {
                 reader.nextChar();
                 ch = reader.getCurrentChar();

@@ -16,8 +16,25 @@ public class LexerToken {
         this.column = column;
     }
 
+    public TokenID getTokenID(){
+        return tokenID;
+    }
+
+    public String getLexeme() {
+        return lexeme;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
     @Override
     public String toString() {
-        return tokenID.name() + ", " + lexeme + ", Line: " + line + ", Column: " + column + "\n";
+        return "| " + tokenID.name() + " | " + lexeme + " | LINEA "
+                + line + " (COLUMNA " + column + ") |\n";
     }
 }

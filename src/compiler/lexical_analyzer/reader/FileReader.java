@@ -33,7 +33,7 @@ public class FileReader extends Reader {
             if (scanner.hasNextLine()) {
                 line = scanner.nextLine();
                 incrementCurrentLineByOne();
-                setCurrentColumn(0);
+                resetCurrentColumn();
             }
         }
     }

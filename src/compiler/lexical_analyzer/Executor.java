@@ -1,7 +1,10 @@
 package compiler.lexical_analyzer;
 
+import compiler.exceptions.lexical_exceptions.LexicalException;
 import compiler.lexical_analyzer.reader.FileReader;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase encargada de ejecutar llamados a Lexer para que éste busque el siguiente token en su fuente.
@@ -13,32 +16,49 @@ public class Executor {
      * @param args de main
      */
     public static void main(String[] args) {
-        if (args.length > 0) {
-            try {
-                File file = new File(args[0]);
-                Lexer lexer = new Lexer(new FileReader(file.getPath()));
-                LexerToken lexerToken = lexer.getNextToken();
+        try {
+            if (args.length > 0) {
+                ArrayList<LexerToken> tokensList = getAllTokensFromPath(args[0]);
 
-                while(lexerToken != null) {
-                    System.out.println(lexerToken);
-                    lexerToken = lexer.getNextToken();
+                if (args.length > 1) {
+                    // TODO: Implement output file
+                    File outputFile = new File(args[1]);
+                } else {
+                    printTokenTable(tokensList);
                 }
             }
-            catch (Exception e) {
-                // TODO: Throw exception
-                System.out.print(e.toString());
-            }
-
-            if (args.length > 1) {
-                // TODO: Implement output file
-                File outputFile = new File(args[1]);
-            }
         }
-        else {
-            // TODO: Throw exception
-            System.out.println("No file provided");
+        catch (Exception e) {
+            System.out.print(e.toString());
+        }
+    }
+
+    public static ArrayList<LexerToken> getAllTokensFromPath(String path) throws LexicalException {
+        File file = new File(path);
+        Lexer lexer = new Lexer(new FileReader(file.getPath()));
+        return getAllTokens(lexer);
+    }
+
+    private static ArrayList<LexerToken> getAllTokens(Lexer lexer) throws LexicalException {
+        LexerToken lexerToken = lexer.getNextToken();
+        ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
+
+        while(lexerToken.getTokenID() != TokenID.TOKEN_EOF) {
+            tokens.add(lexerToken);
+            // TODO: No imprimir lexerToken
+            //System.out.println(lexerToken);
+            lexerToken = lexer.getNextToken();
         }
 
-        // TODO: Save result in outputFile if it isn't null
+        return tokens;
+    }
+
+    private static void printTokenTable(ArrayList<LexerToken> tokensList){
+        System.out.println("CORRECTO: ANALISIS LEXICO\n" +
+                "| TOKEN | LEXEMA | NUMERO DE LINEA (NUMERO DE COLUMNA) |");
+
+        for(LexerToken token : tokensList) {
+            System.out.println(token);
+        }
     }
 }

@@ -16,14 +16,6 @@ public abstract class Reader {
     }
 
     /**
-     * Actualiza el valor del número de la línea que se está procesando.
-     * @param currentLine int con el número de la línea actual
-     */
-    public void setCurrentLine(int currentLine){
-        this.currentLine = currentLine;
-    }
-
-    /**
      * Incrementa el número de la línea actual en uno.
      */
     protected void incrementCurrentLineByOne(){
@@ -39,11 +31,11 @@ public abstract class Reader {
     }
 
     /**
-     * Actualiza el valor del número de la columna en la línea que se está procesando.
-     * @param currentColumn int con el número de la columna actual
+     * @author Bautista Frigolé
+     * Actualiza el valor del número de la columna a 0.
      */
-    public void setCurrentColumn(int currentColumn){
-        this.currentColumn = currentColumn;
+    public void resetCurrentColumn(){
+        this.currentColumn = 0;
     }
 
     /**

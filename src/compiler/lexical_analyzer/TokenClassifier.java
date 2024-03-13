@@ -17,8 +17,6 @@ public class TokenClassifier {
         tokenCharMap.put('*', TokenID.TOKEN_OP_MULT);
         tokenCharMap.put('/', TokenID.TOKEN_OP_DIV);
         tokenCharMap.put('%', TokenID.TOKEN_OP_MOD);
-        tokenCharMap.put('&', TokenID.TOKEN_OP_AND);
-        tokenCharMap.put('|', TokenID.TOKEN_OP_OR);
         tokenCharMap.put('!', TokenID.TOKEN_OP_NOT);
         tokenCharMap.put('=', TokenID.TOKEN_OP_EQ);
         tokenCharMap.put('>', TokenID.TOKEN_OP_LARGER);
@@ -65,6 +63,8 @@ public class TokenClassifier {
         tokenStrMap.put("class", TokenID.TOKEN_ID_CLASS);
 
         // Operators
+        tokenStrMap.put("&&", TokenID.TOKEN_OP_AND);
+        tokenStrMap.put("||", TokenID.TOKEN_OP_OR);
         tokenStrMap.put("==", TokenID.TOKEN_OP_EQ);
         tokenStrMap.put("!=", TokenID.TOKEN_OP_NEQ);
         tokenStrMap.put(">=", TokenID.TOKEN_OP_LARGEREQ);
