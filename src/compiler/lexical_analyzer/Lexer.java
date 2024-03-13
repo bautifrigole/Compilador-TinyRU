@@ -57,6 +57,7 @@ public class Lexer {
             }
         }
 
+        //TODO: Distinguir salto de línea escrito por el usuario del nuestro
         if(!isStringOpen && ch=='"'){
             isStringOpen = true;
             while (isStringOpen){
@@ -64,9 +65,39 @@ public class Lexer {
             }
             currentToken.append(ch);
             reader.nextChar();
+            return new LexerToken(TokenID.TOKEN_LITERAL_STR, currentToken.toString(),
+                    reader.getCurrentLine(), tokenStartingColumn);
         }
         else{
+            //Verficación si es un número
+            //TODO: Mover a método
+            if(Character.isDigit(ch)){
+                //TODO: Tirar error en salto de línea
+                while (!TokenSeparator.isSeparator(ch) && ch!=' '){
+                    if(!Character.isDigit(ch)){
+                        //TODO: Throw exception unexpected character?
+                        System.out.println("ERROR");
+                    }
+                    currentToken.append(ch);
+                    reader.nextChar();
+                    ch = reader.getCurrentChar();
+                }
+
+                return new LexerToken(TokenID.TOKEN_LITERAL_INT, currentToken.toString(),
+                        reader.getCurrentLine(), tokenStartingColumn);
+
+            }
+            else{
+                //Verificación
+                if(Character.isUpperCase(ch)){
+
+                }
+
+            }
+
+
             while (!TokenSeparator.isSeparator(ch) && ch!=' ' && ch!='\n') {
+
                 currentToken.append(ch);
                 reader.nextChar();
                 ch = reader.getCurrentChar();
@@ -150,5 +181,20 @@ public class Lexer {
         }
         isStringOpen = ch != '"';
         return ch;
+    }
+
+    private Character buildIdentifierLexeme(){
+        Character ch = reader.getCurrentChar();
+        while (!TokenSeparator.isSeparator(ch) && ch!=' '){
+            if(!Character.isAlphabetic(ch) && !Character.isDigit(ch) && ch!='_'){
+                //TODO: Throw exception unexpected character?
+                System.out.println("ERROR");
+            }
+            currentToken.append(ch);
+            reader.nextChar();
+            ch = reader.getCurrentChar();
+        }
+        return ch;
+
     }
 }

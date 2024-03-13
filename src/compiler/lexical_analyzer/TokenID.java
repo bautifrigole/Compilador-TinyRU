@@ -25,6 +25,10 @@ public enum TokenID {
     TOKEN_ID_OBJ,
     TOKEN_ID_CLASS,
 
+    // Literal
+    TOKEN_LITERAL_INT,
+    TOKEN_LITERAL_STR,
+
     // Operators
     TOKEN_OP_PLUS,
     TOKEN_OP_MINUS,
@@ -48,18 +52,14 @@ public enum TokenID {
 
     // Types
     TOKEN_TYPE_INT,
-    TOKEN_TYPE_FLOAT,
     TOKEN_TYPE_BOOL,
     TOKEN_TYPE_CHAR,
     TOKEN_TYPE_STR,
     TOKEN_TYPE_VOID,
-    TOKEN_TYPE_OBJECT,
-    TOKEN_TYPE_ARRAY,
 
 
     // Characters
-    TOKEN_COMMENT,
-    TOKEN_NEWLINE,
+
     TOKEN_TAB,
     TOKEN_VERTICALTAB,
     TOKEN_CARRIAGERETURN,
@@ -74,4 +74,7 @@ public enum TokenID {
     TOKEN_COLON,
     TOKEN_SEMICOLON,
     TOKEN_EOF,
+    TOKEN_STRUCT_OBJECT,
+    TOKEN_STRUCT_ARRAY,
+    TOKEN_STRUCT_IO,
 }

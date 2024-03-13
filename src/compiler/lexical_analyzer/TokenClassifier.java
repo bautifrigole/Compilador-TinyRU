@@ -35,14 +35,27 @@ public class TokenClassifier {
         // Characters
         // tokenCharMap.put('\n', compiler.lexical_analyzer.TokenID.TOKEN_NEWLINE);
         tokenCharMap.put('\t', TokenID.TOKEN_TAB);
-        tokenCharMap.put('v', TokenID.TOKEN_VERTICALTAB);
+        tokenCharMap.put('\u000B', TokenID.TOKEN_VERTICALTAB);
         tokenCharMap.put('\r', TokenID.TOKEN_CARRIAGERETURN);
     }
 
     private static final Map<String, TokenID> tokenStrMap = new HashMap<>();
 
     static {
-        // Keywords
+        // Operators
+        tokenStrMap.put("&&", TokenID.TOKEN_OP_AND);
+        tokenStrMap.put("||", TokenID.TOKEN_OP_OR);
+        tokenStrMap.put("==", TokenID.TOKEN_OP_EQ);
+        tokenStrMap.put("!=", TokenID.TOKEN_OP_NEQ);
+        tokenStrMap.put(">=", TokenID.TOKEN_OP_LARGEREQ);
+        tokenStrMap.put("<=", TokenID.TOKEN_OP_SMALLEREQ);
+        tokenStrMap.put("=", TokenID.TOKEN_OP_ASSIGN);
+        tokenStrMap.put("++", TokenID.TOKEN_OP_DOUBLEPLUS);
+        tokenStrMap.put("--", TokenID.TOKEN_OP_DOUBLEMINUS);
+        tokenStrMap.put("->", TokenID.TOKEN_OP_ARROW);
+
+        //Keywords
+
         tokenStrMap.put("struct", TokenID.TOKEN_KW_STRUCT);
         tokenStrMap.put("impl", TokenID.TOKEN_KW_IMPL);
         tokenStrMap.put("else", TokenID.TOKEN_KW_ELSE);
@@ -58,32 +71,21 @@ public class TokenClassifier {
         tokenStrMap.put("pri", TokenID.TOKEN_KW_PRI);
         tokenStrMap.put("self", TokenID.TOKEN_KW_SELF);
 
-        // Identifiers
-        tokenStrMap.put("obj", TokenID.TOKEN_ID_OBJ);
-        tokenStrMap.put("class", TokenID.TOKEN_ID_CLASS);
-
-        // Operators
-        tokenStrMap.put("&&", TokenID.TOKEN_OP_AND);
-        tokenStrMap.put("||", TokenID.TOKEN_OP_OR);
-        tokenStrMap.put("==", TokenID.TOKEN_OP_EQ);
-        tokenStrMap.put("!=", TokenID.TOKEN_OP_NEQ);
-        tokenStrMap.put(">=", TokenID.TOKEN_OP_LARGEREQ);
-        tokenStrMap.put("<=", TokenID.TOKEN_OP_SMALLEREQ);
-        tokenStrMap.put("=", TokenID.TOKEN_OP_ASSIGN);
-        tokenStrMap.put("++", TokenID.TOKEN_OP_DOUBLEPLUS);
-        tokenStrMap.put("--", TokenID.TOKEN_OP_DOUBLEMINUS);
-        tokenStrMap.put("->", TokenID.TOKEN_OP_ARROW);
-
         // Types
-        tokenStrMap.put("int", TokenID.TOKEN_TYPE_INT);
-        tokenStrMap.put("float", TokenID.TOKEN_TYPE_FLOAT);
-        tokenStrMap.put("bool", TokenID.TOKEN_TYPE_BOOL);
-        tokenStrMap.put("char", TokenID.TOKEN_TYPE_CHAR);
-        tokenStrMap.put("str", TokenID.TOKEN_TYPE_STR);
+        tokenStrMap.put("Int", TokenID.TOKEN_TYPE_INT);
+        tokenStrMap.put("Bool", TokenID.TOKEN_TYPE_BOOL);
+        tokenStrMap.put("Char", TokenID.TOKEN_TYPE_CHAR);
+        tokenStrMap.put("Str", TokenID.TOKEN_TYPE_STR);
         tokenStrMap.put("void", TokenID.TOKEN_TYPE_VOID);
-        tokenStrMap.put("object", TokenID.TOKEN_TYPE_OBJECT);
-        tokenStrMap.put("array", TokenID.TOKEN_TYPE_ARRAY);
+
+
+        // Predefined Structures
+        tokenStrMap.put("Object", TokenID.TOKEN_STRUCT_OBJECT);
+        tokenStrMap.put("Array", TokenID.TOKEN_STRUCT_ARRAY);
+        tokenStrMap.put("IO", TokenID.TOKEN_STRUCT_IO);
+
     }
+
 
     /**
      * Busca el ID de la key especificada.
@@ -103,11 +105,12 @@ public class TokenClassifier {
         return tokenStrMap.get(key);
     }
 
+    public static TokenID classify
+    }
     //TODO: isKeyWord()
     //TODO: isObjectIdentifier()
     //TODO: isClassIdentifier()
     //TODO: isNumberIdentifier()
-    //TODO: isStringIdentifier()
 
 }
 
