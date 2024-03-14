@@ -9,9 +9,10 @@ import java.util.*;
  */
 public class Lexer {
     private Reader reader;
-    private StringBuilder currentToken;
+    private StringBuilder currentLexeme;
     private int tokenStartingColumn;
     private boolean isStringOpen = false;
+    private boolean isCharacterOpen = false;
 
     /**
      * @author Bautista Frigolé
@@ -29,9 +30,8 @@ public class Lexer {
      * @throws LexicalException Excepción de tipo léxica
      */
     public LexerToken getNextToken() throws LexicalException {
-        currentToken = new StringBuilder();
+        currentLexeme = new StringBuilder();
         Character ch = reader.getCurrentChar();
-
 
         if (ch == null) {
             return new LexerToken(TokenID.TOKEN_EOF, null,
@@ -44,8 +44,13 @@ public class Lexer {
         }
 
         while(ch==' ' || ch=='\n'){
+
             reader.nextChar();
             ch = reader.getCurrentChar();
+            if (ch == null) {
+                return new LexerToken(TokenID.TOKEN_EOF, null,
+                        reader.getCurrentLine(), tokenStartingColumn);
+            }
         }
 
         tokenStartingColumn = reader.getCurrentColumn();
@@ -63,43 +68,50 @@ public class Lexer {
             }
         }
 
-        if(!isStringOpen && ch=='"'){
+        if(ch=='"'){
             return getStringLiteralLexerToken(ch);
         }
         else{
-            if(Character.isDigit(ch)){
-                return getIntLiteralLexerToken(ch);
+            if(ch=='\''){
+                return getCharLiteralLexerToken();
             }
             else{
-                ch = buildIdentifierOrKeyWordLexeme();
-                TokenID tokenID = TokenClassifier.getTokenStrID(currentToken.toString());
-
-                if (tokenID != null) {
-                    return new LexerToken(tokenID, currentToken.toString(),
-                            reader.getCurrentLine(), tokenStartingColumn);
+                if(Character.isDigit(ch)){
+                    return getIntLiteralLexerToken(ch);
                 }
-                else {
-                    tokenID = getIdentifierTokenID(currentToken.toString());
+                else{
+                    ch = buildIdentifierOrKeyWordLexeme();
+                    TokenID tokenID = TokenClassifier.getTokenStrID(currentLexeme.toString());
+
                     if (tokenID != null) {
-                        return new LexerToken(tokenID, currentToken.toString(),
+                        return new LexerToken(tokenID, currentLexeme.toString(),
                                 reader.getCurrentLine(), tokenStartingColumn);
                     }
+                    else {
+                        tokenID = getIdentifierTokenID(currentLexeme.toString());
+                        if (tokenID != null) {
+                            return new LexerToken(tokenID, currentLexeme.toString(),
+                                    reader.getCurrentLine(), tokenStartingColumn);
+                        }
+                    }
+                }
+
+                if (ch == null) {
+                    return new LexerToken(TokenID.TOKEN_EOF, null,
+                            reader.getCurrentLine(), tokenStartingColumn);
                 }
             }
 
-            if (ch == null) {
-                return new LexerToken(TokenID.TOKEN_EOF, null,
-                        reader.getCurrentLine(), tokenStartingColumn);
-            }
 
+            //TODO: Sacar este while
             while (!TokenSeparator.isSeparator(ch) && ch!=' ' && ch!='\n') {
-                currentToken.append(ch);
+                currentLexeme.append(ch);
                 reader.nextChar();
                 ch = reader.getCurrentChar();
             }
         }
 
-        return new LexerToken(TokenID.NONE, currentToken.toString(),
+        return new LexerToken(TokenID.NONE, currentLexeme.toString(),
                 reader.getCurrentLine(), tokenStartingColumn);
     }
 
@@ -117,9 +129,9 @@ public class Lexer {
         Character nextCh = reader.getCurrentChar();
         if (ch == nextCh){
             reader.nextChar();
-            currentToken.append(ch);
-            currentToken.append(nextCh);
-            return new LexerToken(TokenClassifier.getTokenStrID(currentToken.toString()), currentToken.toString(),
+            currentLexeme.append(ch);
+            currentLexeme.append(nextCh);
+            return new LexerToken(TokenClassifier.getTokenStrID(currentLexeme.toString()), currentLexeme.toString(),
                     reader.getCurrentLine(), tokenStartingColumn);
         }else{
             throw new MissingOperationCharacter(reader.getCurrentLine(), tokenStartingColumn, ch, ch);
@@ -128,14 +140,14 @@ public class Lexer {
 
     private LexerToken getSingleOrDoubleLexerToken() throws LexicalException {
         Character ch = reader.getCurrentChar();
-        currentToken.append(ch);
+        currentLexeme.append(ch);
         reader.nextChar();
         Character nextCh = reader.getCurrentChar();
         List<Character> continuationList = TokenSeparator.getSepContinuation(ch);
         if(continuationList!= null && continuationList.contains(nextCh)){
-            currentToken.append(nextCh);
+            currentLexeme.append(nextCh);
 
-            if(currentToken.toString().equals("/?")){
+            if(currentLexeme.toString().equals("/?")){
                 while (ch != '\n') {
                     reader.nextChar();
                     ch = reader.getCurrentChar();
@@ -145,8 +157,8 @@ public class Lexer {
             }
             else{
                 reader.nextChar();
-                return new LexerToken(TokenClassifier.getTokenStrID(currentToken.toString()),
-                        currentToken.toString(), reader.getCurrentLine(), tokenStartingColumn);
+                return new LexerToken(TokenClassifier.getTokenStrID(currentLexeme.toString()),
+                        currentLexeme.toString(), reader.getCurrentLine(), tokenStartingColumn);
             }
         }
 
@@ -159,15 +171,15 @@ public class Lexer {
         while (isStringOpen){
             ch = buildStringLiteral();
         }
-        currentToken.append(ch);
+        currentLexeme.append(ch);
         reader.nextChar();
-        return new LexerToken(TokenID.TOKEN_LITERAL_STR, currentToken.toString(),
+        return new LexerToken(TokenID.TOKEN_LITERAL_STR, currentLexeme.toString(),
                 reader.getCurrentLine(), tokenStartingColumn);
     }
 
     private Character buildStringLiteral() throws UnclosedStrException, CannotResolveSymbolException {
         Character ch = reader.getCurrentChar();
-        currentToken.append(ch);
+        currentLexeme.append(ch);
         reader.nextChar();
         ch = reader.getCurrentChar();
 
@@ -185,29 +197,106 @@ public class Lexer {
         isStringOpen = ch != '"';
         return ch;
     }
+    private LexerToken getCharLiteralLexerToken() throws LexicalException {
+        List<Character> specialCharacters = Arrays.stream(new Character[]{'t','r','n'}).toList();
+        Character ch;
+        Character nextCh;
+
+        reader.nextChar();
+        ch = reader.getCurrentChar();
+        if(ch==null){
+            throw new UnclosedCharException(reader.getCurrentLine(), tokenStartingColumn);
+        }
+        if(ch=='\\'){
+            reader.nextChar();
+            nextCh = reader.getCurrentChar();
+            if(nextCh==null){
+                throw new UnclosedCharException(reader.getCurrentLine(), tokenStartingColumn);
+            }
+            else{
+                if(nextCh=='0'){
+                    throw new CannotResolveSymbolException(reader.getCurrentLine(),
+                            tokenStartingColumn, '\0');
+                }
+                else{
+                    if(nextCh=='\''){
+                        reader.nextChar();
+                        nextCh= reader.getCurrentChar();
+
+                        if(nextCh == null ||nextCh!='\''){
+                            throw new UnclosedCharException(reader.getCurrentLine(), tokenStartingColumn);
+                        }
+                        else{
+                            currentLexeme.append(nextCh);
+                            reader.nextChar();
+                            return new LexerToken(TokenID.TOKEN_LITERAL_CHAR, currentLexeme.toString(),
+                                    reader.getCurrentLine(), tokenStartingColumn);
+                        }
+
+
+                    }
+                    else{
+                        if(specialCharacters.contains(nextCh)){
+                            currentLexeme.append(ch);
+                        }
+                    }
+                    //TODO: Verificar que nextCh sea un caracter de nuestro alfabeto
+                    currentLexeme.append(nextCh);
+                }
+            }
+
+        }
+        else{
+            if (ch=='\''){
+                throw new EmptyCharException(reader.getCurrentLine(),tokenStartingColumn);
+            }
+            else{
+                if(ch=='\n'){
+                    throw new UnclosedCharException(reader.getCurrentLine(), tokenStartingColumn);
+                }
+                else{
+                    //TODO: Verificar que ch sea un caracter de nuestro alfabeto
+                    currentLexeme.append(ch);
+                }
+            }
+
+
+        }
+        reader.nextChar();
+        ch= reader.getCurrentChar();
+
+        if (ch!='\''){
+            throw new UnclosedCharException(reader.getCurrentLine(), tokenStartingColumn);
+        }
+
+        reader.nextChar();
+        return new LexerToken(TokenID.TOKEN_LITERAL_CHAR, currentLexeme.toString(),
+                reader.getCurrentLine(), tokenStartingColumn);
+    }
+
 
     private LexerToken getIntLiteralLexerToken(Character ch) throws UnexpectedCharacterException {
         while (!TokenSeparator.isSeparator(ch) && ch !=' '){
             if(!Character.isDigit(ch)){
                 throw new UnexpectedCharacterException(reader.getCurrentLine(),
-                        tokenStartingColumn, currentToken.toString(), ch);
+                        tokenStartingColumn, currentLexeme.toString(), ch);
             }
-            currentToken.append(ch);
+            currentLexeme.append(ch);
             reader.nextChar();
             ch = reader.getCurrentChar();
         }
 
-        return new LexerToken(TokenID.TOKEN_LITERAL_INT, currentToken.toString(),
+        return new LexerToken(TokenID.TOKEN_LITERAL_INT, currentLexeme.toString(),
                 reader.getCurrentLine(), tokenStartingColumn);
     }
 
     private Character buildIdentifierOrKeyWordLexeme() throws InvalidIdentifierException {
         Character ch = reader.getCurrentChar();
         while (ch != null && !TokenSeparator.isSeparator(ch) && ch!=' ' && ch!='\n'){
-            currentToken.append(ch);
+            currentLexeme.append(ch);
             if(!Character.isAlphabetic(ch) && !Character.isDigit(ch) && ch!='_'){
                 throw new InvalidIdentifierException(reader.getCurrentLine(),
-                        tokenStartingColumn, currentToken.toString(), ch);
+                        tokenStartingColumn, currentLexeme.toString(), ch);
             }
             reader.nextChar();
             ch = reader.getCurrentChar();

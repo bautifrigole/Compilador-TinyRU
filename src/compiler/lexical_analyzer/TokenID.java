@@ -28,6 +28,7 @@ public enum TokenID {
     // Literal
     TOKEN_LITERAL_INT,
     TOKEN_LITERAL_STR,
+    TOKEN_LITERAL_CHAR,
 
     // Operators
     TOKEN_OP_PLUS,
