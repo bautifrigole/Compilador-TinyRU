@@ -45,8 +45,8 @@ public class Executor {
 
         while(lexerToken.getTokenID() != TokenID.TOKEN_EOF) {
             tokens.add(lexerToken);
-            // TODO: No imprimir lexerToken
-            //System.out.println(lexerToken);
+            // TODO: ACORDARSE de borrar la línea de abajo
+            System.out.println(lexerToken);
             lexerToken = lexer.getNextToken();
         }
 

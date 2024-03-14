@@ -3,12 +3,11 @@ package compiler.lexical_analyzer;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
+/**
  * Clase encargada de almacenar los tokens junto con su ID.
  */
 public class TokenClassifier {
     private static final Map<Character, TokenID> tokenCharMap = new HashMap<>();
-    //TODO: Lista de palabras reservadas
 
     static {
         // Operators
@@ -55,7 +54,6 @@ public class TokenClassifier {
         tokenStrMap.put("->", TokenID.TOKEN_OP_ARROW);
 
         //Keywords
-
         tokenStrMap.put("struct", TokenID.TOKEN_KW_STRUCT);
         tokenStrMap.put("impl", TokenID.TOKEN_KW_IMPL);
         tokenStrMap.put("else", TokenID.TOKEN_KW_ELSE);
@@ -78,14 +76,11 @@ public class TokenClassifier {
         tokenStrMap.put("Str", TokenID.TOKEN_TYPE_STR);
         tokenStrMap.put("void", TokenID.TOKEN_TYPE_VOID);
 
-
         // Predefined Structures
         tokenStrMap.put("Object", TokenID.TOKEN_STRUCT_OBJECT);
         tokenStrMap.put("Array", TokenID.TOKEN_STRUCT_ARRAY);
         tokenStrMap.put("IO", TokenID.TOKEN_STRUCT_IO);
-
     }
-
 
     /**
      * Busca el ID de la key especificada.
@@ -104,13 +99,4 @@ public class TokenClassifier {
     public static TokenID getTokenStrID(String key) {
         return tokenStrMap.get(key);
     }
-
-    public static TokenID classify
-    }
-    //TODO: isKeyWord()
-    //TODO: isObjectIdentifier()
-    //TODO: isClassIdentifier()
-    //TODO: isNumberIdentifier()
-
 }
-
