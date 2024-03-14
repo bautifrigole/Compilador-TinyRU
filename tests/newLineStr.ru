@@ -1,4 +1,2 @@
-"hola"
-
-que
-tal"
+"holáñÓ"
+"hol♠"

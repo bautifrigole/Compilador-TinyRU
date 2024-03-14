@@ -32,6 +32,7 @@ public class Lexer {
         currentToken = new StringBuilder();
         Character ch = reader.getCurrentChar();
 
+
         if (ch == null) {
             return new LexerToken(TokenID.TOKEN_EOF, null,
                     reader.getCurrentLine(), tokenStartingColumn);
@@ -174,12 +175,12 @@ public class Lexer {
             throw new UnclosedStrException(reader.getCurrentLine(), tokenStartingColumn);
         }
         else {
-            //TODO: Chequear si ch es un carácter de nuestro alfabeto
-
-            if (ch == '\0') {
+            if(!isValidStringCharacter(ch) ){
                 throw new CannotResolveSymbolException(reader.getCurrentLine(),
                         tokenStartingColumn, ch);
             }
+
+
         }
         isStringOpen = ch != '"';
         return ch;
@@ -236,5 +237,12 @@ public class Lexer {
             throw new InvalidIdentifierException(reader.getCurrentLine(),
                     tokenStartingColumn, str, firstChar);
         }
+    }
+
+    private boolean isValidStringCharacter(Character ch){
+        List<Character> spanishCharacters = Arrays.stream(new Character[]{'á','é','í','ó','ú', 'Á','É','Í','Ó','Ú','ñ','Ñ','ü','Ü'}).toList();
+
+        int asciiCode = (int) ch;
+        return (asciiCode >= 32 && asciiCode <= 126)|| spanishCharacters.contains(ch);
     }
 }
