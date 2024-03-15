@@ -77,7 +77,7 @@ class CharacterTests {
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "\\" + "n", 1, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "a", 2, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "\\", 3, 0));
-        tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "hola ds", 4, 0));
+        tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "'", 4, 0));
         assertTrue(areTheSameTokenLists(tokens, Executor.getAllTokensFromPath("tests/lexical_tests/char/validCharOutput.ru")));
     }
 

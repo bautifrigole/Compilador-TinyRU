@@ -28,7 +28,7 @@ class StringTests {
     @Test
     @DisplayName("ERROR: Null in string Test")
     void nullInStringTest() {
-        assertThrows(UnclosedStrException.class,
+        assertThrows(CannotResolveSymbolException.class,
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/string/nullInStr.ru"));
     }
 
