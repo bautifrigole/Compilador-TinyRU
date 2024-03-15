@@ -22,6 +22,10 @@ public class Executor {
         try {
             if (args.length > 0) {
                 ArrayList<LexerToken> tokensList = getAllTokensFromPath(args[0]);
+                if (tokensList == null) {
+                    System.out.println("ERROR: EL ARCHIVO \"" + args[0] + "\" NO EXISTE.");
+                    return;
+                }
 
                 if (args.length > 1) {
                     File outputFile = new File(args[1]);
@@ -33,19 +37,25 @@ public class Executor {
                     printTokenTable(tokensList);
                 }
             }
+            else {
+                System.out.println("ERROR: ARCHIVO DE ENTRADA NO ESPECIFICADO.");
+            }
         } catch (Exception e) {
-            System.out.print(e.toString());
+            System.out.print("ERROR JAVA:\n"+ e.toString());
         }
     }
 
     /**
      * @author Bautista Frigolé
-     * Busca todos los tokens dentro del archivo especificado en la ruta.
+     * Busca todos los tokens dentro del archivo especificado en la ruta. Si el archivo no existe, devuelve null.
      * @param path Ruta del archivo.
      * @return Lista de LexerToken.
      */
     public static ArrayList<LexerToken> getAllTokensFromPath(String path) throws LexicalException {
         File file = new File(path);
+        if (!file.exists()) {
+            return null;
+        }
         Lexer lexer = new Lexer(new FileReader(file.getPath()));
         return getAllTokens(lexer);
     }

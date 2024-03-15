@@ -6,6 +6,7 @@ import compiler.lexical_analyzer.reader.Reader;
 import java.util.*;
 
 /**
+ * @author Bautista Frigolé y Francisco Devaux
  * Clase encargada de realizar el análisis léxico.
  */
 public class Lexer {
@@ -13,8 +14,8 @@ public class Lexer {
     private StringBuilder currentLexeme;
     private int tokenStartingColumn;
     private boolean isStringOpen = false;
-    private List<Character> specialCharacters = Arrays.stream(new Character[]{'t', 'r', 'n'}).toList();
-    private List<Character> spanishCharacters = Arrays.stream(new Character[]{
+    private final List<Character> specialCharacters = Arrays.stream(new Character[]{'t', 'r', 'n'}).toList();
+    private final List<Character> spanishCharacters = Arrays.stream(new Character[]{
             'á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú', 'ñ', 'Ñ', 'ü', 'Ü'}).toList();
 
     /**
@@ -29,7 +30,7 @@ public class Lexer {
     /**
      * @return compiler.lexical_analyzer.LexerToken con la información del siguiente token
      * @throws LexicalException Excepción de tipo léxica
-     * @author Bautista Frigolé
+     * @author Bautista Frigolé y Francisco Devaux
      * Busca el siguiente token a formar en el código fuente.
      */
     public LexerToken getNextToken() throws LexicalException {
