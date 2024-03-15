@@ -18,6 +18,11 @@ public class Lexer {
     private final List<Character> spanishCharacters = Arrays.stream(new Character[]{
             'á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú', 'ñ', 'Ñ', 'ü', 'Ü'}).toList();
 
+    private final int maxIntValue = 2147483647;
+    private final int maxIntLength = 10;
+    private final int maxStringLength = 1024;
+
+
     /**
      * @param reader Reader de dónde se irán solicitando los caracteres a analizar
      * @author Bautista Frigolé
@@ -138,10 +143,16 @@ public class Lexer {
             currentLexeme.append(nextCh);
 
             if (currentLexeme.toString().equals("/?")) {
-                while (ch != '\n') {
+                // TODO: Verificar que no sea \0
+                while (ch != null && ch != '\n') {
+
+                    if (isInvalidCharacter(ch)) {
+                        throw new CannotResolveSymbolException(reader.getCurrentColumn(), reader.getCurrentColumn(), ch);
+                    }
                     reader.nextChar();
                     ch = reader.getCurrentChar();
                 }
+
                 reader.nextChar();
                 return getNextToken();
             } else {
@@ -173,7 +184,7 @@ public class Lexer {
         if (ch == null || ch == '\n') {
             throw new UnclosedStrException(reader.getCurrentLine(), tokenStartingColumn);
         } else {
-            if (ch == '\\'){
+            if (ch == '\\') {
                 Character nextCh;
                 reader.nextChar();
                 nextCh = reader.getCurrentChar();
@@ -186,14 +197,12 @@ public class Lexer {
                     if (nextCh == '0') {
                         throw new CannotResolveSymbolException(reader.getCurrentLine(),
                                 tokenStartingColumn, '\0');
-                    }
-                    else {
+                    } else {
                         currentLexeme.append(ch);
                         currentLexeme.append(nextCh);
                     }
                 }
-            }
-            else {
+            } else {
                 if (isInvalidCharacter(ch)) {
                     throw new CannotResolveSymbolException(reader.getCurrentLine(),
                             tokenStartingColumn, ch);
@@ -202,7 +211,7 @@ public class Lexer {
         }
 
         isStringOpen = ch != '"';
-        if (isStringOpen){
+        if (isStringOpen) {
             currentLexeme.append(ch);
         }
     }

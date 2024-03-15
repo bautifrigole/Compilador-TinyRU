@@ -17,7 +17,7 @@ public class TokenClassifier {
         tokenCharMap.put('/', TokenID.TOKEN_OP_DIV);
         tokenCharMap.put('%', TokenID.TOKEN_OP_MOD);
         tokenCharMap.put('!', TokenID.TOKEN_OP_NOT);
-        tokenCharMap.put('=', TokenID.TOKEN_OP_EQ);
+        tokenCharMap.put('=', TokenID.TOKEN_OP_ASSIGN);
         tokenCharMap.put('>', TokenID.TOKEN_OP_LARGER);
         tokenCharMap.put('<', TokenID.TOKEN_OP_SMALLER);
         tokenCharMap.put('[', TokenID.TOKEN_OPEN_BRACKET);
@@ -30,12 +30,6 @@ public class TokenClassifier {
         tokenCharMap.put('.', TokenID.TOKEN_DOT);
         tokenCharMap.put(':', TokenID.TOKEN_COLON);
         tokenCharMap.put(';', TokenID.TOKEN_SEMICOLON);
-
-        // Characters
-        // tokenCharMap.put('\n', compiler.lexical_analyzer.TokenID.TOKEN_NEWLINE);
-        tokenCharMap.put('\t', TokenID.TOKEN_TAB);
-        tokenCharMap.put('\u000B', TokenID.TOKEN_VERTICALTAB);
-        tokenCharMap.put('\r', TokenID.TOKEN_CARRIAGERETURN);
     }
 
     private static final Map<String, TokenID> tokenStrMap = new HashMap<>();
@@ -48,7 +42,6 @@ public class TokenClassifier {
         tokenStrMap.put("!=", TokenID.TOKEN_OP_NEQ);
         tokenStrMap.put(">=", TokenID.TOKEN_OP_LARGEREQ);
         tokenStrMap.put("<=", TokenID.TOKEN_OP_SMALLEREQ);
-        tokenStrMap.put("=", TokenID.TOKEN_OP_ASSIGN);
         tokenStrMap.put("++", TokenID.TOKEN_OP_DOUBLEPLUS);
         tokenStrMap.put("--", TokenID.TOKEN_OP_DOUBLEMINUS);
         tokenStrMap.put("->", TokenID.TOKEN_OP_ARROW);
@@ -84,6 +77,7 @@ public class TokenClassifier {
 
     /**
      * Busca el ID de la key especificada.
+     *
      * @param key Character a buscar su ID
      * @return TokenID del Character especificado
      */
@@ -93,6 +87,7 @@ public class TokenClassifier {
 
     /**
      * Busca el ID de la key especificada.
+     *
      * @param key String a buscar su ID
      * @return TokenID del String especificado
      */
