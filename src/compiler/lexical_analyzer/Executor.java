@@ -2,6 +2,7 @@ package compiler.lexical_analyzer;
 
 import compiler.exceptions.lexical_exceptions.LexicalException;
 import compiler.lexical_analyzer.reader.FileReader;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class Executor {
 
     /**
      * Método main.
+     *
      * @param args de main
      */
     public static void main(String[] args) {
@@ -27,8 +29,7 @@ public class Executor {
                     printTokenTable(tokensList);
                 }
             }
-        }
-        catch (LexicalException e) {
+        } catch (Exception e) {
             System.out.print(e.toString());
         }
     }
@@ -43,7 +44,7 @@ public class Executor {
         LexerToken lexerToken = lexer.getNextToken();
         ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
 
-        while(lexerToken.getTokenID() != TokenID.TOKEN_EOF) {
+        while (lexerToken.getTokenID() != TokenID.TOKEN_EOF) {
             tokens.add(lexerToken);
             // TODO: ACORDARSE de borrar la línea de abajo
             System.out.println(lexerToken);
@@ -53,11 +54,11 @@ public class Executor {
         return tokens;
     }
 
-    private static void printTokenTable(ArrayList<LexerToken> tokensList){
+    private static void printTokenTable(ArrayList<LexerToken> tokensList) {
         System.out.println("CORRECTO: ANALISIS LEXICO\n" +
                 "| TOKEN | LEXEMA | NUMERO DE LINEA (NUMERO DE COLUMNA) |");
 
-        for(LexerToken token : tokensList) {
+        for (LexerToken token : tokensList) {
             System.out.println(token);
         }
     }
