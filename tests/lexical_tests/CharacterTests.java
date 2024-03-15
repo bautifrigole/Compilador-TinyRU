@@ -1,7 +1,9 @@
 package lexical_tests;
 
 import compiler.exceptions.lexical_exceptions.CannotResolveSymbolException;
+import compiler.exceptions.lexical_exceptions.EmptyCharException;
 import compiler.exceptions.lexical_exceptions.LexicalException;
+import compiler.exceptions.lexical_exceptions.UnclosedCharException;
 import compiler.lexical_analyzer.Executor;
 import compiler.lexical_analyzer.LexerToken;
 import compiler.lexical_analyzer.TokenID;
@@ -17,17 +19,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CharacterTests {
 
-
     @Test
-    @DisplayName("ERROR: Null in character Test")
-    void nullCharTest() {
-        assertThrows(CannotResolveSymbolException.class,
-                () -> Executor.getAllTokensFromPath("tests/lexical_tests/char/nullChar.ru"));
+    @DisplayName("ERROR: Empty character Test (With \\)")
+    void emptyCharTest() {
+        assertThrows(EmptyCharException.class,
+                () -> Executor.getAllTokensFromPath("tests/lexical_tests/char/emptyChar.ru"));
     }
 
     @Test
+    @DisplayName("ERROR: Invalid slash character Test (With \\)")
+    void invalidSlashSymbolCharTest() {
+        assertThrows(UnclosedCharException.class,
+                () -> Executor.getAllTokensFromPath("tests/lexical_tests/char/invalidSlashChar.ru"));
+    }
+
+
+    @Test
     @DisplayName("ERROR: Invalid symbol in character Test (With \\)")
-    void invalidSymbolSlashCharTest() {
+    void invalidSymbolWithSlashCharTest() {
         assertThrows(CannotResolveSymbolException.class,
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/char/invalidSymbolInChar1.ru"));
     }
@@ -40,6 +49,27 @@ class CharacterTests {
     }
 
     @Test
+    @DisplayName("ERROR: New line between ' Test")
+    void newLineCharTest() {
+        assertThrows(UnclosedCharException.class,
+                () -> Executor.getAllTokensFromPath("tests/lexical_tests/char/newLineChar.ru"));
+    }
+
+    @Test
+    @DisplayName("ERROR: Null in character Test")
+    void nullCharTest() {
+        assertThrows(CannotResolveSymbolException.class,
+                () -> Executor.getAllTokensFromPath("tests/lexical_tests/char/nullChar.ru"));
+    }
+
+    @Test
+    @DisplayName("ERROR: Triple ' Test")
+    void tripleMarkCharTest() {
+        assertThrows(EmptyCharException.class,
+                () -> Executor.getAllTokensFromPath("tests/lexical_tests/char/tripleMarkChar.ru"));
+    }
+
+    @Test
     @DisplayName("Verification of correct characters Test")
     void validDifferentCharacters() throws LexicalException {
         ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
@@ -47,7 +77,7 @@ class CharacterTests {
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "\\" + "n", 1, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "a", 2, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "\\", 3, 0));
-        tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "'", 4, 0));
+        tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "hola ds", 4, 0));
         assertTrue(areTheSameTokenLists(tokens, Executor.getAllTokensFromPath("tests/lexical_tests/char/validCharOutput.ru")));
     }
 

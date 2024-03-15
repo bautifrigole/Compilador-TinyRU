@@ -15,7 +15,6 @@ public class Utils {
         for (int i = 0; i < tokens1.size(); i++) {
             LexerToken token1 = tokens1.get(i);
             LexerToken token2 = tokens2.get(i);
-            //TODO: Imprimir lo que es distinto
 
             if (!token1.getTokenID().equals(token2.getTokenID())
                     || !token1.getLexemeString().equals(token2.getLexemeString())
