@@ -1,4 +1,3 @@
-import calculator.java.Calculator;
 import compiler.exceptions.lexical_exceptions.LexicalException;
 import compiler.lexical_analyzer.Executor;
 import compiler.lexical_analyzer.LexerToken;
@@ -17,10 +16,27 @@ class LexicalTests {
     void sumTest() throws LexicalException {
         ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
         tokens.add(new LexerToken(TokenID.TOKEN_OP_EQ, "=", 0, 0));
-        assertTrue(areTheSameLists(tokens, Executor.getAllTokensFromPath("tests/sum.ru")));
+        assertTrue(areTheSameTokenLists(tokens, Executor.getAllTokensFromPath("tests/sum.ru")));
     }
 
-    private static boolean areTheSameLists(ArrayList<LexerToken> tokens1, ArrayList<LexerToken> tokens2) {
+    @Test
+    @DisplayName("Null in character Test")
+    void nullCharTest() throws LexicalException {
+    }
+
+    @Test
+    @DisplayName("Verification of correct characters Test")
+    void validDifferentCharacters() throws LexicalException {
+        ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
+        tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "n", 0, 0));
+        tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "\n", 1, 0));
+        tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "a", 2, 0));
+        tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "\\", 3, 0));
+        tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "'", 4, 0));
+        assertTrue(areTheSameTokenLists(tokens, Executor.getAllTokensFromPath("tests/char/validCharOutput.ru")));
+    }
+
+    private static boolean areTheSameTokenLists(ArrayList<LexerToken> tokens1, ArrayList<LexerToken> tokens2) {
         if (tokens1.size() != tokens2.size()) {
             return false;
         }
@@ -30,7 +46,8 @@ class LexicalTests {
             LexerToken token2 = tokens2.get(i);
 
             if (!token1.getTokenID().equals(token2.getTokenID())
-                    || !token1.getLexeme().equals(token2.getLexeme())
+                    || !token1.getLexemeString().equals(token2.getLexemeString())
+                    || !token1.getLexemeChar().equals(token2.getLexemeChar())
                     || token1.getLine() != token2.getLine()
                     || token1.getColumn() != token2.getColumn()) {
                 return false;

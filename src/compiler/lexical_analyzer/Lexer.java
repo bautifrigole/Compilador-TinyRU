@@ -34,7 +34,7 @@ public class Lexer {
         Character ch = reader.getCurrentChar();
 
         if (ch == null) {
-            return new LexerToken(TokenID.TOKEN_EOF, null,
+            return new LexerToken(TokenID.TOKEN_EOF, (String) null,
                     reader.getCurrentLine(), tokenStartingColumn);
         }
 
@@ -48,7 +48,7 @@ public class Lexer {
             reader.nextChar();
             ch = reader.getCurrentChar();
             if (ch == null) {
-                return new LexerToken(TokenID.TOKEN_EOF, null,
+                return new LexerToken(TokenID.TOKEN_EOF, (String) null,
                         reader.getCurrentLine(), tokenStartingColumn);
             }
         }
@@ -97,7 +97,7 @@ public class Lexer {
                 }
 
                 if (ch == null) {
-                    return new LexerToken(TokenID.TOKEN_EOF, null,
+                    return new LexerToken(TokenID.TOKEN_EOF, (String) null,
                             reader.getCurrentLine(), tokenStartingColumn);
                 }
             }
@@ -187,7 +187,7 @@ public class Lexer {
             throw new UnclosedStrException(reader.getCurrentLine(), tokenStartingColumn);
         }
         else {
-            if(!isValidStringCharacter(ch) ){
+            if(!isValidCharacter(ch) ){
                 throw new CannotResolveSymbolException(reader.getCurrentLine(),
                         tokenStartingColumn, ch);
             }
@@ -198,6 +198,7 @@ public class Lexer {
         return ch;
     }
     private LexerToken getCharLiteralLexerToken() throws LexicalException {
+        //TODO: Refactorizar función
         List<Character> specialCharacters = Arrays.stream(new Character[]{'t','r','n'}).toList();
         Character ch;
         Character nextCh;
@@ -240,7 +241,9 @@ public class Lexer {
                             currentLexeme.append(ch);
                         }
                     }
-                    //TODO: Verificar que nextCh sea un caracter de nuestro alfabeto
+                    if(!isValidCharacter(nextCh)){
+                        throw new CannotResolveSymbolException(reader.getCurrentLine(),tokenStartingColumn, nextCh);
+                    }
                     currentLexeme.append(nextCh);
                 }
             }
@@ -255,7 +258,10 @@ public class Lexer {
                     throw new UnclosedCharException(reader.getCurrentLine(), tokenStartingColumn);
                 }
                 else{
-                    //TODO: Verificar que ch sea un caracter de nuestro alfabeto
+                    if(!isValidCharacter(ch)){
+                        throw new CannotResolveSymbolException(reader.getCurrentLine(),tokenStartingColumn, ch);
+                    }
+
                     currentLexeme.append(ch);
                 }
             }
@@ -328,7 +334,7 @@ public class Lexer {
         }
     }
 
-    private boolean isValidStringCharacter(Character ch){
+    private boolean isValidCharacter(Character ch){
         List<Character> spanishCharacters = Arrays.stream(new Character[]{'á','é','í','ó','ú', 'Á','É','Í','Ó','Ú','ñ','Ñ','ü','Ü'}).toList();
 
         int asciiCode = (int) ch;

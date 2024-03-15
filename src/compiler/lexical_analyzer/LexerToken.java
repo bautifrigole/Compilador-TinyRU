@@ -5,13 +5,20 @@ package compiler.lexical_analyzer;
  */
 public class LexerToken {
     private TokenID tokenID;
-    private String lexeme;
+    private String lexemeString;
+    private Character lexemeChar;
     private int line;
     private int column;
 
     public LexerToken(TokenID tokenID, String lexeme, int line, int column) {
         this.tokenID = tokenID;
-        this.lexeme = lexeme;
+        this.lexemeString = lexeme;
+        this.line = line;
+        this.column = column;
+    }
+    public LexerToken(TokenID tokenID, Character lexeme, int line, int column) {
+        this.tokenID = tokenID;
+        this.lexemeChar = lexeme;
         this.line = line;
         this.column = column;
     }
@@ -20,9 +27,10 @@ public class LexerToken {
         return tokenID;
     }
 
-    public String getLexeme() {
-        return lexeme;
+    public String getLexemeString() {
+        return lexemeString;
     }
+    public Character getLexemeChar(){return lexemeChar;}
 
     public int getLine() {
         return line;
@@ -34,6 +42,13 @@ public class LexerToken {
 
     @Override
     public String toString() {
+        String lexeme;
+        if (lexemeString == null){
+            lexeme = lexemeChar.toString();
+        }
+        else{
+            lexeme = lexemeString;
+        }
         return "| " + tokenID.name() + " | " + lexeme + " | LINEA "
                 + line + " (COLUMNA " + column + ") |\n";
     }

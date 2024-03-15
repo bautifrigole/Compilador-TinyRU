@@ -28,7 +28,7 @@ public class Executor {
                 }
             }
         }
-        catch (Exception e) {
+        catch (LexicalException e) {
             System.out.print(e.toString());
         }
     }
