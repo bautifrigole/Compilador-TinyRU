@@ -17,9 +17,7 @@ public class Lexer {
     private final List<Character> specialCharacters = Arrays.asList('t', 'r', 'n');
     private final List<Character> spanishCharacters = Arrays.asList(
             'á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú', 'ñ', 'Ñ', 'ü', 'Ü');
-    private final int maxIntValue = 2147483647;
-    private final int maxIntLength = 10;
-    private final int maxStringLength = 1024;
+    private int lexemeLength = 0;
 
     /**
      * @param reader Reader de dónde se irán solicitando los caracteres a analizar
@@ -82,6 +80,7 @@ public class Lexer {
                 if (Character.isDigit(ch)) {
                     return getIntLiteralLexerToken(ch);
                 } else {
+                    //TODO: Verificar longitud de identificador
                     ch = buildIdentifierOrKeyWordLexeme();
                     TokenID tokenID = TokenClassifier.getTokenStrID(currentLexeme.toString());
 
@@ -141,7 +140,7 @@ public class Lexer {
             currentLexeme.append(nextCh);
 
             if (currentLexeme.toString().equals("/?")) {
-                
+
                 reader.nextChar();
                 ch = reader.getCurrentChar();
                 while (ch != null && ch != '\n') {
@@ -178,10 +177,15 @@ public class Lexer {
         isStringOpen = true;
         reader.nextChar();
         while (isStringOpen) {
+            int maxStringLength = 1024;
+            if (lexemeLength > maxStringLength) {
+                //TODO: Tirar excepcion nueva para String demasiado grande
+            }
+            lexemeLength++;
             buildStringLiteral();
             reader.nextChar();
         }
-
+        lexemeLength = 0;
         return new LexerToken(TokenID.TOKEN_LITERAL_STR, currentLexeme.toString(),
                 reader.getCurrentLine(), tokenStartingColumn);
     }
@@ -307,15 +311,24 @@ public class Lexer {
 
     private LexerToken getIntLiteralLexerToken(Character ch) throws UnexpectedCharacterException {
         while (!TokenSeparator.isSeparator(ch) && ch != ' ') {
+
             if (!Character.isDigit(ch)) {
                 throw new UnexpectedCharacterException(reader.getCurrentLine(),
                         tokenStartingColumn, currentLexeme.toString(), ch);
             }
+
             currentLexeme.append(ch);
+            int maxIntValue = 2147483647;
+            int maxIntLength = 10;
+            if (currentLexeme.toString().length() > maxIntLength || Long.parseLong(currentLexeme.toString()) > maxIntValue) {
+                //TODO: Tirar excepcion nueva para Int demasiado grande
+                System.out.println("Int demasiado grande");
+            }
             reader.nextChar();
             ch = reader.getCurrentChar();
         }
 
+        lexemeLength = 0;
         return new LexerToken(TokenID.TOKEN_LITERAL_INT, currentLexeme.toString(),
                 reader.getCurrentLine(), tokenStartingColumn);
     }
