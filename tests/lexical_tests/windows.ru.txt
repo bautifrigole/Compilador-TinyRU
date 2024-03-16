@@ -1,0 +1,5 @@
+struct Pepe {
+	Str nombre;
+	Int edad;
+}
+ 

@@ -48,7 +48,7 @@ public class Lexer {
                     reader.getCurrentColumn(), ch);
         }
 
-        while (ch == ' ' || ch == '\n') {
+        while (ch == ' ' || ch == '\n' || ch == '\t' || ch == '\r' || ch == (char) 11) {
             reader.nextChar();
             ch = reader.getCurrentChar();
             if (ch == null) {
