@@ -143,8 +143,18 @@ public class Lexer {
             currentLexeme.append(nextCh);
 
             if (currentLexeme.toString().equals("/?")) {
-                // TODO: Verificar que no sea \0
+                
+                reader.nextChar();
+                ch = reader.getCurrentChar();
                 while (ch != null && ch != '\n') {
+                    if (ch == '\\') {
+                        reader.nextChar();
+                        ch = reader.getCurrentChar();
+                        if (ch != null && ch == '0') {
+                            throw new CannotResolveSymbolException(reader.getCurrentLine(),
+                                    reader.getCurrentColumn(), '\0');
+                        }
+                    }
 
                     if (isInvalidCharacter(ch)) {
                         throw new CannotResolveSymbolException(reader.getCurrentColumn(), reader.getCurrentColumn(), ch);
@@ -196,7 +206,7 @@ public class Lexer {
                     // Invalid character '\0'
                     if (nextCh == '0') {
                         throw new CannotResolveSymbolException(reader.getCurrentLine(),
-                                tokenStartingColumn, '\0');
+                                reader.getCurrentColumn(), '\0');
                     } else {
                         currentLexeme.append(ch);
                         currentLexeme.append(nextCh);
