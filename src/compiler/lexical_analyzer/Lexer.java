@@ -17,7 +17,7 @@ public class Lexer {
     private final List<Character> specialCharacters = Arrays.asList('t', 'r', 'n');
     private final List<Character> spanishCharacters = Arrays.asList(
             'á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú', 'ñ', 'Ñ', 'ü', 'Ü');
-    private int lexemeLength = 0;
+
 
     /**
      * @param reader Reader de dónde se irán solicitando los caracteres a analizar
@@ -45,7 +45,7 @@ public class Lexer {
 
         if (ch == '\0') {
             throw new CannotResolveSymbolException(reader.getCurrentLine(),
-                    tokenStartingColumn, ch);
+                    reader.getCurrentColumn(), ch);
         }
 
         while (ch == ' ' || ch == '\n') {
@@ -174,18 +174,19 @@ public class Lexer {
     }
 
     private LexerToken getStringLiteralLexerToken() throws LexicalException {
+        int maxStringLength = 1024;
         isStringOpen = true;
         reader.nextChar();
         while (isStringOpen) {
-            int maxStringLength = 1024;
-            if (lexemeLength > maxStringLength) {
-                //TODO: Tirar excepcion nueva para String demasiado grande
+
+            if (currentLexeme.length() > maxStringLength) {
+                throw new StringSizeException(reader.getCurrentLine(), tokenStartingColumn);
             }
-            lexemeLength++;
+
             buildStringLiteral();
             reader.nextChar();
         }
-        lexemeLength = 0;
+
         return new LexerToken(TokenID.TOKEN_LITERAL_STR, currentLexeme.toString(),
                 reader.getCurrentLine(), tokenStartingColumn);
     }
@@ -208,7 +209,7 @@ public class Lexer {
                     // Invalid character '\0'
                     if (nextCh == '0') {
                         throw new CannotResolveSymbolException(reader.getCurrentLine(),
-                                reader.getCurrentColumn(), '\0');
+                                tokenStartingColumn, '\0');
                     } else {
                         currentLexeme.append(ch);
                         currentLexeme.append(nextCh);
@@ -217,7 +218,7 @@ public class Lexer {
             } else {
                 if (isInvalidCharacter(ch)) {
                     throw new CannotResolveSymbolException(reader.getCurrentLine(),
-                            tokenStartingColumn, ch);
+                            reader.getCurrentColumn(), ch);
                 }
             }
         }
@@ -248,7 +249,7 @@ public class Lexer {
                     throw new UnclosedCharException(reader.getCurrentLine(), tokenStartingColumn);
                 } else {
                     if (isInvalidCharacter(ch)) {
-                        throw new CannotResolveSymbolException(reader.getCurrentLine(), tokenStartingColumn, ch);
+                        throw new CannotResolveSymbolException(reader.getCurrentLine(), reader.getCurrentColumn(), ch);
                     }
                     currentLexeme.append(ch);
                 }
@@ -309,37 +310,39 @@ public class Lexer {
         return null;
     }
 
-    private LexerToken getIntLiteralLexerToken(Character ch) throws UnexpectedCharacterException {
-        while (!TokenSeparator.isSeparator(ch) && ch != ' ') {
+    private LexerToken getIntLiteralLexerToken(Character ch) throws UnexpectedCharacterException, IntSizeException {
+        int maxIntValue = 2147483647;
+        int maxIntLength = 10;
 
+        while (ch != null && !TokenSeparator.isSeparator(ch) && ch != ' ' && ch != '\n') {
             if (!Character.isDigit(ch)) {
                 throw new UnexpectedCharacterException(reader.getCurrentLine(),
-                        tokenStartingColumn, currentLexeme.toString(), ch);
+                        reader.getCurrentColumn(), currentLexeme.toString(), ch);
             }
-
             currentLexeme.append(ch);
-            int maxIntValue = 2147483647;
-            int maxIntLength = 10;
             if (currentLexeme.toString().length() > maxIntLength || Long.parseLong(currentLexeme.toString()) > maxIntValue) {
-                //TODO: Tirar excepcion nueva para Int demasiado grande
-                System.out.println("Int demasiado grande");
+                throw new IntSizeException(reader.getCurrentLine(), tokenStartingColumn);
             }
             reader.nextChar();
             ch = reader.getCurrentChar();
         }
 
-        lexemeLength = 0;
+
         return new LexerToken(TokenID.TOKEN_LITERAL_INT, currentLexeme.toString(),
                 reader.getCurrentLine(), tokenStartingColumn);
     }
 
-    private Character buildIdentifierOrKeyWordLexeme() throws InvalidIdentifierException {
+    private Character buildIdentifierOrKeyWordLexeme() throws LexicalException {
         Character ch = reader.getCurrentChar();
+        int maxIdentifierLength = 64;
         while (ch != null && !TokenSeparator.isSeparator(ch) && ch != ' ' && ch != '\n') {
             currentLexeme.append(ch);
+            if (currentLexeme.length() > maxIdentifierLength) {
+                throw new IdentifierLengthException(reader.getCurrentLine(), tokenStartingColumn);
+            }
             if (!Character.isAlphabetic(ch) && !Character.isDigit(ch) && ch != '_') {
                 throw new InvalidIdentifierException(reader.getCurrentLine(),
-                        tokenStartingColumn, currentLexeme.toString(), ch);
+                        reader.getCurrentColumn(), currentLexeme.toString(), ch);
             }
             reader.nextChar();
             ch = reader.getCurrentChar();
@@ -358,14 +361,14 @@ public class Lexer {
                 return TokenID.TOKEN_ID_CLASS;
             } else {
                 throw new InvalidIdentifierException(reader.getCurrentLine(),
-                        tokenStartingColumn, str, lastChar);
+                        reader.getCurrentColumn(), str, lastChar);
             }
         }
         if (Character.isAlphabetic(firstChar)) {
             return TokenID.TOKEN_ID_OBJ;
         } else {
             throw new InvalidIdentifierException(reader.getCurrentLine(),
-                    tokenStartingColumn, str, firstChar);
+                    reader.getCurrentColumn(), str, firstChar);
         }
     }
 

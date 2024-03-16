@@ -38,5 +38,15 @@ class CommentsTests {
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/comments/nullInComment.ru"));
     }
 
+    @Test
+    @DisplayName("Comment ignored correctly Test")
+    void ValidCommentIgnoreTest() throws LexicalException {
+        ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
+        tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_STR, "hola", 0, 0));
+        tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_STR, "que tal", 1, 0));
+
+        assertTrue(areTheSameTokenLists(tokens, Executor.getAllTokensFromPath("tests/lexical_tests/comments/ValidCommentIgnore.ru")));
+
+    }
 
 }

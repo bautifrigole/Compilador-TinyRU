@@ -2,6 +2,7 @@ package lexical_tests;
 
 import compiler.exceptions.lexical_exceptions.CannotResolveSymbolException;
 import compiler.exceptions.lexical_exceptions.LexicalException;
+import compiler.exceptions.lexical_exceptions.StringSizeException;
 import compiler.exceptions.lexical_exceptions.UnclosedStrException;
 import compiler.lexical_analyzer.Executor;
 import compiler.lexical_analyzer.LexerToken;
@@ -23,6 +24,20 @@ class StringTests {
     void invalidSymbolStringTest() {
         assertThrows(CannotResolveSymbolException.class,
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/string/invalidSymbolInString.ru"));
+    }
+
+    @Test
+    @DisplayName("ERROR: Max string size Test")
+    void maxStringSizeTest() {
+        assertThrows(StringSizeException.class,
+                () -> Executor.getAllTokensFromPath("tests/lexical_tests/string/maxStringSize.ru"));
+    }
+
+    @Test
+    @DisplayName("ERROR: New line in string Test")
+    void newLineInStringTest() {
+        assertThrows(UnclosedStrException.class,
+                () -> Executor.getAllTokensFromPath("tests/lexical_tests/string/newLineInString.ru"));
     }
 
     @Test

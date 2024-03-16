@@ -14,9 +14,9 @@ import java.util.ArrayList;
 public class Executor {
 
     /**
+     * @param args Argumentos de main.
      * @author Bautista Frigolé y Francisco Devaux
      * Método main.
-     * @param args Argumentos de main.
      */
     public static void main(String[] args) {
         try {
@@ -32,24 +32,22 @@ public class Executor {
                     outputFile.createNewFile();
                     FileWriter writer = new FileWriter(args[1]);
                     writeTokenTable(writer, tokensList);
-                }
-                else {
+                } else {
                     printTokenTable(tokensList);
                 }
-            }
-            else {
+            } else {
                 System.out.println("ERROR: ARCHIVO DE ENTRADA NO ESPECIFICADO.");
             }
         } catch (Exception e) {
-            System.out.print("ERROR JAVA:\n"+ e.toString());
+            System.out.print(e.toString());
         }
     }
 
     /**
-     * @author Bautista Frigolé
-     * Busca todos los tokens dentro del archivo especificado en la ruta. Si el archivo no existe, devuelve null.
      * @param path Ruta del archivo.
      * @return Lista de LexerToken.
+     * @author Bautista Frigolé
+     * Busca todos los tokens dentro del archivo especificado en la ruta. Si el archivo no existe, devuelve null.
      */
     public static ArrayList<LexerToken> getAllTokensFromPath(String path) throws LexicalException {
         File file = new File(path);
@@ -61,10 +59,10 @@ public class Executor {
     }
 
     /**
-     * @author Bautista Frigolé
-     * Busca todos los tokens utilizando el Lexer dado.
      * @param lexer Lexer con el cual obtendrá los tokens.
      * @return Lista de LexerToken.
+     * @author Bautista Frigolé
+     * Busca todos los tokens utilizando el Lexer dado.
      */
     private static ArrayList<LexerToken> getAllTokens(Lexer lexer) throws LexicalException {
         LexerToken lexerToken = lexer.getNextToken();
@@ -79,13 +77,13 @@ public class Executor {
     }
 
     /**
+     * @param tokensList Lista de LexerToken.
      * @author Bautista Frigolé
      * Imprime por pantalla todos los LexerToken dados.
-     * @param tokensList Lista de LexerToken.
      */
     private static void printTokenTable(ArrayList<LexerToken> tokensList) {
         System.out.println("CORRECTO: ANALISIS LEXICO\n" +
-                "| TOKEN | LEXEMA | NUMERO DE LINEA (NUMERO DE COLUMNA) |");
+                "| TOKEN | LEXEMA | NUMERO DE LINEA (NUMERO DE COLUMNA) | \n");
 
         for (LexerToken token : tokensList) {
             System.out.println(token);
@@ -93,10 +91,10 @@ public class Executor {
     }
 
     /**
+     * @param writer     FileWriter del archivo a llenar.
+     * @param tokensList Lista de LexerToken.
      * @author Bautista Frigolé
      * Escribe en un archivo la tabla con todos los LexerToken dados.
-     * @param writer FileWriter del archivo a llenar.
-     * @param tokensList Lista de LexerToken.
      */
     private static void writeTokenTable(FileWriter writer, ArrayList<LexerToken> tokensList)
             throws IOException {
