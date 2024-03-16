@@ -14,14 +14,12 @@ public class Lexer {
     private StringBuilder currentLexeme;
     private int tokenStartingColumn;
     private boolean isStringOpen = false;
-    private final List<Character> specialCharacters = Arrays.stream(new Character[]{'t', 'r', 'n'}).toList();
-    private final List<Character> spanishCharacters = Arrays.stream(new Character[]{
-            'á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú', 'ñ', 'Ñ', 'ü', 'Ü'}).toList();
-
+    private final List<Character> specialCharacters = Arrays.asList('t', 'r', 'n');
+    private final List<Character> spanishCharacters = Arrays.asList(
+            'á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú', 'ñ', 'Ñ', 'ü', 'Ü');
     private final int maxIntValue = 2147483647;
     private final int maxIntLength = 10;
     private final int maxStringLength = 1024;
-
 
     /**
      * @param reader Reader de dónde se irán solicitando los caracteres a analizar

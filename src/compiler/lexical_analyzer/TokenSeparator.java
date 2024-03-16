@@ -1,5 +1,6 @@
 package compiler.lexical_analyzer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,13 +22,27 @@ public class TokenSeparator {
      * @return List de Character con todos los posibles caracteres
      */
     public static List<Character> getSepContinuation(Character key) {
-        return switch (key) {
-            case '+' -> Arrays.asList(new Character[]{'+'});
-            case '-' -> Arrays.asList(new Character[]{'-', '>'});
-            case '>', '!', '<', '=' -> Arrays.asList(new Character[]{'='});
-            case '/' -> Arrays.asList(new Character[]{'?'});
-            default -> null;
-        };
+        List<Character> result = new ArrayList<>();
+        switch (key) {
+            case '+':
+                result.add('+');
+                break;
+            case '-':
+                result.addAll(Arrays.asList('-', '>'));
+                break;
+            case '>':
+            case '!':
+            case '<':
+            case '=':
+                result.add('=');
+                break;
+            case '/':
+                result.add('?');
+                break;
+            default:
+                result = null;
+        }
+        return result;
     }
 
     /**
