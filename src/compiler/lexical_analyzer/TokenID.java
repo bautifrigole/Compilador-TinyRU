@@ -1,6 +1,7 @@
 package compiler.lexical_analyzer;
 
-/*
+/**
+ * @author Bautista Frigolé y Francisco Devaux
  * Enum con todos los posibles valores del ID de un token.
  */
 public enum TokenID {

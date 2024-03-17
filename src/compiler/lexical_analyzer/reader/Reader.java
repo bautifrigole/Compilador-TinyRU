@@ -1,6 +1,7 @@
 package compiler.lexical_analyzer.reader;
 
 /**
+ * @author Bautista Frigolé
  * Clase encargada de leer caracteres desde una fuente.
  */
 public abstract class Reader {
@@ -8,6 +9,7 @@ public abstract class Reader {
     private int currentColumn = 0;
 
     /**
+     * @author Bautista Frigolé
      * Devuelve el número de la línea que se está procesando.
      * @return int con el número de la línea actual
      */
@@ -16,6 +18,7 @@ public abstract class Reader {
     }
 
     /**
+     * @author Bautista Frigolé
      * Incrementa el número de la línea actual en uno.
      */
     protected void incrementCurrentLineByOne(){
@@ -23,6 +26,7 @@ public abstract class Reader {
     }
 
     /**
+     * @author Bautista Frigolé
      * Devuelve el número de la columna en la línea que se está procesando.
      * @return int con el número de la columna actual
      */
@@ -39,6 +43,7 @@ public abstract class Reader {
     }
 
     /**
+     * @author Bautista Frigolé
      * Incrementa el número de la columna actual en uno.
      */
     protected void incrementCurrentColumnByOne(){
@@ -46,11 +51,13 @@ public abstract class Reader {
     }
 
     /**
+     * @author Bautista Frigolé
      * Avanza hacia el siguiente carácter en la fuente si es posible.
      */
     public abstract void nextChar();
 
     /**
+     * @author Bautista Frigolé
      * Devuelve el carácter que se está procesando.
      * @return Character con el carácter actual
      */

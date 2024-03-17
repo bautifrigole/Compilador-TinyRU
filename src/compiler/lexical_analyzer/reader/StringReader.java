@@ -1,12 +1,14 @@
 package compiler.lexical_analyzer.reader;
 
 /**
+ * @author Bautista Frigolé
  * Clase encargada de leer caracteres desde un String fuente.
  */
 public class StringReader extends Reader{
     private String inputContent;
 
     /**
+     * @author Bautista Frigolé
      * Constructor de la clase.
      * @param inputContent String a procesar como fuente
      */

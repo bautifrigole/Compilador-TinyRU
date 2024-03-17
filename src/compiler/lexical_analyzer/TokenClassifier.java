@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * @author Bautista Frigolé y Francisco Devaux
  * Clase encargada de almacenar los tokens junto con su ID.
  */
 public class TokenClassifier {
+    /**
+     * HashMap en el cual se vincula un Character con un {@link TokenID}.
+     */
     private static final Map<Character, TokenID> tokenCharMap = new HashMap<>();
 
     static {
@@ -32,6 +36,9 @@ public class TokenClassifier {
         tokenCharMap.put(';', TokenID.TOKEN_SEMICOLON);
     }
 
+    /**
+     * HashMap en el cual se vincula un String con un {@link TokenID}.
+     */
     private static final Map<String, TokenID> tokenStrMap = new HashMap<>();
 
     static {
@@ -76,8 +83,8 @@ public class TokenClassifier {
     }
 
     /**
+     * @author Bautista Frigolé
      * Busca el ID de la key especificada.
-     *
      * @param key Character a buscar su ID
      * @return TokenID del Character especificado
      */
@@ -86,8 +93,8 @@ public class TokenClassifier {
     }
 
     /**
+     * @author Bautista Frigolé
      * Busca el ID de la key especificada.
-     *
      * @param key String a buscar su ID
      * @return TokenID del String especificado
      */

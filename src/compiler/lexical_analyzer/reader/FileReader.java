@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Scanner;
 
 /**
+ * @author Bautista Frigolé y Francisco Devaux
  * Clase encargada de leer caracteres desde un archivo fuente.
  */
 public class FileReader extends Reader {
@@ -11,6 +12,7 @@ public class FileReader extends Reader {
     private String line = "";
 
     /**
+     * @author Francisco Devaux
      * Constructor de la clase.
      * @param path String con la ruta hacia el archivo fuente
      */
