@@ -44,7 +44,6 @@ public class FileReader extends Reader {
             return line.charAt(getCurrentColumn());
         } else {
             if (scanner.hasNextLine()) {
-                // TODO: '\r\n' in Windows
                 return '\n';
             } else {
                 return null;
