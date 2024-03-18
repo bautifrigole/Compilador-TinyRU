@@ -6,8 +6,8 @@ import compiler.lexical_analyzer.reader.Reader;
 import java.util.*;
 
 /**
- * @author Bautista Frigolé y Francisco Devaux
  * Clase encargada de realizar el análisis léxico.
+ * @author Bautista Frigolé y Francisco Devaux
  */
 public class Lexer {
     /**
@@ -38,17 +38,17 @@ public class Lexer {
 
 
     /**
+     * Constructor de la clase.
      * @param reader Reader de dónde se irán solicitando los caracteres a analizar
      * @author Bautista Frigolé
-     * Constructor de la clase.
      */
     public Lexer(Reader reader) {
         this.reader = reader;
     }
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Busca el siguiente token a formar en el código fuente.
+     * @author Bautista Frigolé y Francisco Devaux
      * @return {@link LexerToken} con información del token.
      * @throws LexicalException {@link LexicalException}.
      */
@@ -125,8 +125,8 @@ public class Lexer {
     }
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Devuelve el LexerToken formado por un token separador compuesto por un sólo carácter.
+     * @author Bautista Frigolé y Francisco Devaux
      * @return {@link LexerToken} con información del token.
      */
     private LexerToken getSingleLexerToken() {
@@ -138,8 +138,8 @@ public class Lexer {
     }
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Devuelve el LexerToken formado por un token separador compuesto por dos caracteres.
+     * @author Bautista Frigolé y Francisco Devaux
      * @return {@link LexerToken} con información del token.
      * @throws MissingOperationCharacter {@link MissingOperationCharacter}.
      */
@@ -159,8 +159,8 @@ public class Lexer {
     }
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Devuelve el LexerToken formado por un token separador compuesto por uno o dos caracteres.
+     * @author Bautista Frigolé y Francisco Devaux
      * @return {@link LexerToken} con información del token.
      * @throws LexicalException {@link LexicalException}.
      */
@@ -208,8 +208,8 @@ public class Lexer {
     }
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Devuelve el LexerToken formado por un token válido de tipo literal String.
+     * @author Bautista Frigolé y Francisco Devaux
      * @return {@link LexerToken} con información del token.
      * @throws LexicalException {@link LexicalException}.
      */
@@ -231,8 +231,8 @@ public class Lexer {
     }
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Construye un literal String válido dentro de {@link Lexer#currentLexeme}.
+     * @author Bautista Frigolé y Francisco Devaux
      * @throws LexicalException Excepción de tipo léxica.
      */
     private void buildStringLiteral() throws LexicalException {
@@ -274,8 +274,8 @@ public class Lexer {
     }
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Devuelve el LexerToken formado por un token válido de tipo literal Character.
+     * @author Bautista Frigolé y Francisco Devaux
      * @return {@link LexerToken} con información del token.
      * @throws LexicalException {@link LexicalException}.
      */
@@ -319,8 +319,8 @@ public class Lexer {
     }
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Devuelve el LexerToken formado por un token válido de tipo literal Character para
+     * @author Bautista Frigolé y Francisco Devaux
      * el caso particular en el que comienza con '\'.
      * @return {@link LexerToken} con información del token.
      * @throws LexicalException {@link LexicalException}.
@@ -369,8 +369,8 @@ public class Lexer {
     }
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Devuelve el LexerToken formado por un token válido de tipo literal Integer.
+     * @author Bautista Frigolé y Francisco Devaux
      * @return {@link LexerToken} con información del token.
      * @throws LexicalException {@link LexicalException}.
      */
@@ -398,8 +398,8 @@ public class Lexer {
     }
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Construye un lexema de tipo identificador o palabra reservada en {@link Lexer#currentLexeme}
+     * @author Bautista Frigolé y Francisco Devaux
      * @return {@link LexerToken} con información del token.
      * @throws LexicalException {@link LexicalException}.
      */
@@ -422,8 +422,8 @@ public class Lexer {
     }
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Clasifica el String dado en identificador de clase o de objeto.
+     * @author Bautista Frigolé y Francisco Devaux
      * @return {@link TokenID} del identificador.
      * @throws InvalidIdentifierException {@link InvalidIdentifierException}.
      */
@@ -450,8 +450,8 @@ public class Lexer {
     }
 
     /**
-     * @author Francisco Devaux
      * Indica si un caracter es inválido según nuestro alfabeto.
+     * @author Francisco Devaux
      * @return boolean que es True si el caracter es invalido.
      */
     private boolean isInvalidCharacter(Character ch) {

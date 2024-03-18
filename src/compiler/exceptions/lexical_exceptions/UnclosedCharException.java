@@ -1,8 +1,8 @@
 package compiler.exceptions.lexical_exceptions;
 
 /**
- * @author Francisco Devaux
  * Excepción cuando en un literal de tipo Character no se cerraron comillas simples.
+ * @author Francisco Devaux
  */
 public class UnclosedCharException extends LexicalException {
     public UnclosedCharException(int line, int column) {

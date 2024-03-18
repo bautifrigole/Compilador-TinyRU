@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Bautista Frigolé y Francisco Devaux
  * Clase encargada de reconocer las cadenas y caracteres que separan a los tokens.
+ * @author Bautista Frigolé y Francisco Devaux
  */
 public class TokenSeparator {
     /**
@@ -25,8 +25,8 @@ public class TokenSeparator {
     public static final List<Character> doubleSeparators = Arrays.asList(new Character[]{'&', '|'});
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Devuelve las posibles continuaciones de un carácter para armar tokens.
+     * @author Bautista Frigolé y Francisco Devaux
      * @param key Character a buscar sus posibles continuaciones
      * @return List de Character con todos los posibles caracteres
      */
@@ -55,8 +55,8 @@ public class TokenSeparator {
     }
 
     /**
-     * @author Bautista Frigolé y Francisco Devaux
      * Indica si un determinado carácter es un separador
+     * @author Bautista Frigolé y Francisco Devaux
      * @param key Character a analizar si es un separador
      * @return boolean que indica si es separador
      */

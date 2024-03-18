@@ -1,8 +1,8 @@
 package compiler.exceptions.lexical_exceptions;
 
 /**
- * @author Francisco Devaux
  * Excepción cuando un literal caracter está vacío.
+ * @author Francisco Devaux
  */
 public class EmptyCharException extends LexicalException {
     public EmptyCharException(int line, int column) {

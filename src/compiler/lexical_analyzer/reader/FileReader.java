@@ -4,16 +4,16 @@ import java.io.File;
 import java.util.Scanner;
 
 /**
- * @author Bautista Frigolé y Francisco Devaux
  * Clase encargada de leer caracteres desde un archivo fuente.
+ * @author Bautista Frigolé y Francisco Devaux
  */
 public class FileReader extends Reader {
     private Scanner scanner;
     private String line = "";
 
     /**
-     * @author Francisco Devaux
      * Constructor de la clase.
+     * @author Francisco Devaux
      * @param path String con la ruta hacia el archivo fuente
      */
     public FileReader(String path) {

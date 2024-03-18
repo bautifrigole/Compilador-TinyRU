@@ -10,13 +10,14 @@ import java.util.ArrayList;
 
 /**
  * Clase encargada de ejecutar llamados a Lexer para que éste busque el siguiente token en su fuente.
+ * @author Bautista Frigolé y Francisco Devaux
  */
 public class Executor {
 
     /**
+     * Método main.
      * @param args Argumentos de main.
      * @author Bautista Frigolé y Francisco Devaux
-     * Método main.
      */
     public static void main(String[] args) {
         try {
@@ -44,10 +45,10 @@ public class Executor {
     }
 
     /**
+     * Busca todos los tokens dentro del archivo especificado en la ruta. Si el archivo no existe, devuelve null.
      * @param path Ruta del archivo.
      * @return Lista de {@link LexerToken}.
      * @author Bautista Frigolé
-     * Busca todos los tokens dentro del archivo especificado en la ruta. Si el archivo no existe, devuelve null.
      */
     public static ArrayList<LexerToken> getAllTokensFromPath(String path) throws LexicalException {
         File file = new File(path);
@@ -59,10 +60,10 @@ public class Executor {
     }
 
     /**
+     * Busca todos los tokens utilizando el {@link Lexer} dado.
      * @param lexer Lexer con el cual obtendrá los tokens.
      * @return Lista de {@link LexerToken}.
      * @author Bautista Frigolé
-     * Busca todos los tokens utilizando el {@link Lexer} dado.
      */
     private static ArrayList<LexerToken> getAllTokens(Lexer lexer) throws LexicalException {
         LexerToken lexerToken = lexer.getNextToken();
@@ -77,9 +78,9 @@ public class Executor {
     }
 
     /**
+     * Imprime por pantalla todos los {@link LexerToken} dados.
      * @param tokensList Lista de {@link LexerToken}.
      * @author Bautista Frigolé
-     * Imprime por pantalla todos los {@link LexerToken} dados.
      */
     private static void printTokenTable(ArrayList<LexerToken> tokensList) {
         System.out.println("CORRECTO: ANALISIS LEXICO\n" +
@@ -91,10 +92,10 @@ public class Executor {
     }
 
     /**
+     * Escribe en un archivo la tabla con todos los {@link LexerToken} dados.
      * @param writer FileWriter del archivo a llenar.
      * @param tokensList Lista de {@link LexerToken}.
      * @author Bautista Frigolé
-     * Escribe en un archivo la tabla con todos los {@link LexerToken} dados.
      */
     private static void writeTokenTable(FileWriter writer, ArrayList<LexerToken> tokensList)
             throws IOException {

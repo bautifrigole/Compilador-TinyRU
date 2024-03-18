@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Bautista Frigolé y Francisco Devaux
  * Clase encargada de almacenar los tokens junto con su ID.
+ * @author Bautista Frigolé y Francisco Devaux
  */
 public class TokenClassifier {
     /**
@@ -83,8 +83,8 @@ public class TokenClassifier {
     }
 
     /**
-     * @author Bautista Frigolé
      * Busca el ID de la key especificada.
+     * @author Bautista Frigolé
      * @param key Character a buscar su ID
      * @return TokenID del Character especificado
      */
@@ -93,8 +93,8 @@ public class TokenClassifier {
     }
 
     /**
-     * @author Bautista Frigolé
      * Busca el ID de la key especificada.
+     * @author Bautista Frigolé
      * @param key String a buscar su ID
      * @return TokenID del String especificado
      */

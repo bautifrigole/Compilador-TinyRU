@@ -1,8 +1,8 @@
 package compiler.exceptions.lexical_exceptions;
 
 /**
- * @author Bautista Frigolé
  * Excepción cuando se recibe un carácter inesperado.
+ * @author Bautista Frigolé
  */
 public class UnexpectedCharacterException extends LexicalException {
     public UnexpectedCharacterException(int line, int column, String lexeme, Character unexpectedCh) {

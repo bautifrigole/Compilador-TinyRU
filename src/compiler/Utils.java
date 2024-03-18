@@ -5,13 +5,15 @@ import compiler.lexical_analyzer.LexerToken;
 import java.util.ArrayList;
 
 /**
- * @author Francisco Devaux y Bautista Frigolé
  * Clase con funciones de utilidad
+ * @author Francisco Devaux y Bautista Frigolé
  */
 public class Utils {
     /**
-     * @author Francisco Devaux y Bautista Frigolé
      * Verifica si dos listas de {@link LexerToken} son iguales.
+     * @author Francisco Devaux y Bautista Frigolé
+     * @param tokens1 Lista de {@link LexerToken}.
+     * @param tokens2 Lista de {@link LexerToken}.
      * @return Retorna true si las listas son iguales.
      */
     public static boolean areTheSameTokenLists(ArrayList<LexerToken> tokens1, ArrayList<LexerToken> tokens2) {

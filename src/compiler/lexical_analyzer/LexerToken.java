@@ -1,8 +1,8 @@
 package compiler.lexical_analyzer;
 
 /**
- * @author Bautista Frigolé y Francisco Devaux
  * Clase encargada de almacenar la información de un token: su ID, su lexema y su ubicación en el código fuente.
+ * @author Bautista Frigolé y Francisco Devaux
  */
 public class LexerToken {
     /**
@@ -23,8 +23,8 @@ public class LexerToken {
     private int column;
 
     /**
-     * @author Bautista Frigolé
      * Constructor de la clase.
+     * @author Bautista Frigolé
      */
     public LexerToken(TokenID tokenID, String lexeme, int line, int column) {
         this.tokenID = tokenID;
@@ -34,32 +34,32 @@ public class LexerToken {
     }
 
     /**
-     * @author Bautista Frigolé
      * Getter de {@link LexerToken#tokenID}.
+     * @author Bautista Frigolé
      */
     public TokenID getTokenID(){
         return tokenID;
     }
 
     /**
-     * @author Bautista Frigolé
      * Getter de {@link LexerToken#lexeme}.
+     * @author Bautista Frigolé
      */
     public String getLexemeString() {
         return lexeme;
     }
 
     /**
-     * @author Bautista Frigolé
      * Getter de {@link LexerToken#line}.
+     * @author Bautista Frigolé
      */
     public int getLine() {
         return line;
     }
 
     /**
-     * @author Bautista Frigolé
      * Getter de {@link LexerToken#column}.
+     * @author Bautista Frigolé
      */
     public int getColumn() {
         return column;
