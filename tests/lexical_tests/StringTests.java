@@ -18,10 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StringTests {
-
+    /**
+     * Clase para ejecutar tests con JUnit relacionados a cadenas.
+     * @author Francisco Devaux
+     */
 
     @Test
-    @DisplayName("ERROR: Single slash in string Test")
+    @DisplayName("ERROR: Invalid symbol in string Test")
     void invalidSymbolStringTest() {
         assertThrows(CannotResolveSymbolException.class,
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/string/invalidSymbolInString.ru"));
@@ -36,7 +39,7 @@ class StringTests {
 
     @Test
     @DisplayName("ERROR: New line in string Test")
-    void newLineInStringTest() {
+    void newLineStringTest() {
         assertThrows(UnclosedStrException.class,
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/string/newLineInString.ru"));
     }
@@ -63,7 +66,7 @@ class StringTests {
     }
 
     @Test
-    @DisplayName("Valid string Test")
+    @DisplayName("Verification of correct string Test")
     void validStringTest() throws LexicalException, FileNotFoundException {
         ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_STR, "hola que tal", 0, 0));

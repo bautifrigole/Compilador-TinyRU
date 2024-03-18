@@ -16,10 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CommentsTests {
-
+    /**
+     * Clase para ejecutar tests con JUnit relacionados a comentarios.
+     * @author Francisco Devaux
+     */
     @Test
     @DisplayName("EndOfFile after comment Test")
-    void validKWStructsTypesTest() throws LexicalException, FileNotFoundException {
+    void endOfFileAfterCommentTest() throws LexicalException, FileNotFoundException {
         ArrayList<LexerToken> tokens = new ArrayList<>();
 
         assertTrue(areTheSameTokenLists(tokens, Executor.getAllTokensFromPath("tests/lexical_tests/comments/EOFAfterComment.ru")));
@@ -27,7 +30,7 @@ class CommentsTests {
 
     @Test
     @DisplayName("ERROR: Invalid symbol in comment Test")
-    void invalidSymbolInCommentTest() {
+    void invalidSymbolCommentTest() {
         assertThrows(CannotResolveSymbolException.class,
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/comments/invalidSymbolInComment.ru"));
     }
@@ -41,7 +44,7 @@ class CommentsTests {
 
     @Test
     @DisplayName("Comment ignored correctly Test")
-    void ValidCommentIgnoreTest() throws LexicalException, FileNotFoundException {
+    void validCommentIgnoreTest() throws LexicalException, FileNotFoundException {
         ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_STR, "hola", 0, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_STR, "que tal", 1, 0));

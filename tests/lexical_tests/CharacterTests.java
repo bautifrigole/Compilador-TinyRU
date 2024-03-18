@@ -19,16 +19,19 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CharacterTests {
-
+    /**
+     * Clase para ejecutar tests con JUnit relacionados a caracteres.
+     * @author Francisco Devaux
+     */
     @Test
-    @DisplayName("ERROR: Empty character Test (With \\)")
+    @DisplayName("ERROR: Empty character Test")
     void emptyCharTest() {
         assertThrows(EmptyCharException.class,
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/char/emptyChar.ru"));
     }
 
     @Test
-    @DisplayName("ERROR: Invalid slash character Test (With \\)")
+    @DisplayName("ERROR: Invalid slash character Test")
     void invalidSlashSymbolCharTest() {
         assertThrows(UnclosedCharException.class,
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/char/invalidSlashChar.ru"));
@@ -72,7 +75,7 @@ class CharacterTests {
 
     @Test
     @DisplayName("Verification of correct characters Test")
-    void validDifferentCharacters() throws LexicalException, FileNotFoundException {
+    void validDifferentCharactersTest() throws LexicalException, FileNotFoundException {
         ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "n", 0, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "\\" + "n", 1, 0));

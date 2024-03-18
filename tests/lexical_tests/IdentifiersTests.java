@@ -14,7 +14,10 @@ import static compiler.Utils.areTheSameTokenLists;
 import static org.junit.jupiter.api.Assertions.*;
 
 class IdentifiersTests {
-
+    /**
+     * Clase para ejecutar tests con JUnit relacionados a identificadores.
+     * @author Francisco Devaux
+     */
     @Test
     @DisplayName("ERROR: Invalid class identifier (Ends in underscore) Test")
     void invalidClassIdentifierTest1() {
@@ -31,7 +34,7 @@ class IdentifiersTests {
 
     @Test
     @DisplayName("ERROR: Invalid object identifier (Starts with underscore) Test")
-    void invalidObjectIdentifierTest1() {
+    void invalidObjectIdentifierTest() {
         assertThrows(InvalidIdentifierException.class,
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/identifiers/invalidObjIdentifier.ru"));
     }
@@ -46,7 +49,7 @@ class IdentifiersTests {
 
     @Test
     @DisplayName("Verification of correct identifiers Test")
-    void validIntTest() throws LexicalException, FileNotFoundException {
+    void validIdentifierTest() throws LexicalException, FileNotFoundException {
         ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_ID_CLASS, "Holahola", 0, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_ID_CLASS, "HoLALSASD", 1, 0));

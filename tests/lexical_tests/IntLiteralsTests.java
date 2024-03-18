@@ -15,11 +15,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class IntLiteralsTests {
-
+    /**
+     * Clase para ejecutar tests con JUnit relacionados a números enteros.
+     * @author Francisco Devaux
+     */
 
     @Test
-    @DisplayName("ERROR: Invalid int literal Test")
-    void invalidSymbolStringTest() {
+    @DisplayName("ERROR: Incorrect formation of int literal Test")
+    void invalidIntLiteralTest() {
         assertThrows(UnexpectedCharacterException.class,
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/int_literals/invalidIntLiteral.ru"));
     }

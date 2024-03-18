@@ -14,7 +14,10 @@ import static compiler.Utils.areTheSameTokenLists;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class KWStructsTypesTests {
-
+    /**
+     * Clase para ejecutar tests con JUnit relacionados a palabras claves, estructuras  predefinidas y tipos.
+     * @author Francisco Devaux
+     */
 
     @Test
     @DisplayName("Verification of correct Key Words, Predefined Structures and Types Test")

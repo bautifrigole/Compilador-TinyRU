@@ -16,16 +16,19 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OperatorsTests {
-
+    /**
+     * Clase para ejecutar tests con JUnit relacionados a operadores.
+     * @author Francisco Devaux
+     */
     @Test
-    @DisplayName("ERROR: Incomplete double operator Test")
+    @DisplayName("ERROR: Incomplete double operators Test")
     void incompleteDoubleOperatorsTest() {
         assertThrows(MissingOperationCharacter.class,
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/operators/incompleteDoubleOperator.ru"));
     }
 
     @Test
-    @DisplayName("Verification of correct Key Words, Predefined Structures and Types Test")
+    @DisplayName("Verification of correct double character operators Test")
     void validDoubleOperatorsTest() throws LexicalException, FileNotFoundException {
         ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_OP_AND, "&&", 0, 0));
@@ -43,7 +46,7 @@ class OperatorsTests {
     }
 
     @Test
-    @DisplayName("Verification of correct Key Words, Predefined Structures and Types Test")
+    @DisplayName("Verification of correct single character operators Test")
     void validSingleOperatorTest() throws LexicalException, FileNotFoundException {
         ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_OP_PLUS, "+", 0, 0));
