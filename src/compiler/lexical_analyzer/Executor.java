@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Clase encargada de ejecutar llamados a Lexer para que éste busque el siguiente token en su fuente.
+ * Clase encargada de ejecutar llamados a {@link Lexer} para que éste busque el siguiente token en su fuente.
  * @author Bautista Frigolé y Francisco Devaux
  */
 public class Executor {
@@ -50,6 +50,8 @@ public class Executor {
      * @param path Ruta del archivo.
      * @return Lista de {@link LexerToken}.
      * @author Bautista Frigolé
+     * @throws LexicalException Excepción de tipo léxica.
+     * @throws FileNotFoundException Excepción de archivo no encontrado.
      */
     public static ArrayList<LexerToken> getAllTokensFromPath(String path) throws LexicalException, FileNotFoundException {
         File file = new File(path);
@@ -65,6 +67,7 @@ public class Executor {
      * @param lexer Lexer con el cual obtendrá los tokens.
      * @return Lista de {@link LexerToken}.
      * @author Bautista Frigolé
+     * @throws LexicalException Excepción de tipo léxica.
      */
     private static ArrayList<LexerToken> getAllTokens(Lexer lexer) throws LexicalException {
         LexerToken lexerToken = lexer.getNextToken();
@@ -97,6 +100,7 @@ public class Executor {
      * @param writer FileWriter del archivo a llenar.
      * @param tokensList Lista de {@link LexerToken}.
      * @author Bautista Frigolé
+     * @throws IOException Excepción de tipo Entrada/Salida.
      */
     private static void writeTokenTable(FileWriter writer, ArrayList<LexerToken> tokensList)
             throws IOException {

@@ -36,6 +36,7 @@ public class LexerToken {
     /**
      * Getter de {@link LexerToken#tokenID}.
      * @author Bautista Frigolé
+     * @return TokenID.
      */
     public TokenID getTokenID(){
         return tokenID;
@@ -44,6 +45,7 @@ public class LexerToken {
     /**
      * Getter de {@link LexerToken#lexeme}.
      * @author Bautista Frigolé
+     * @return String lexema.
      */
     public String getLexemeString() {
         return lexeme;
@@ -52,6 +54,7 @@ public class LexerToken {
     /**
      * Getter de {@link LexerToken#line}.
      * @author Bautista Frigolé
+     * @return int número de línea.
      */
     public int getLine() {
         return line;
@@ -60,6 +63,7 @@ public class LexerToken {
     /**
      * Getter de {@link LexerToken#column}.
      * @author Bautista Frigolé
+     * @return int número de columna.
      */
     public int getColumn() {
         return column;

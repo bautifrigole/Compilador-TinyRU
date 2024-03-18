@@ -1,7 +1,7 @@
 package compiler.exceptions;
 
 /**
- * Clase base de las excepciones en el TinyRU.
+ * Clase base de las excepciones en TinyRU.
  * @author Bautista Frigolé y Francisco Devaux
  */
 public abstract class TinyRUException extends Exception {

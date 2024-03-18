@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Clase encargada de almacenar los tokens junto con su ID.
+ * Clase encargada de almacenar los tokens junto con su {@link TokenID}.
  * @author Bautista Frigolé y Francisco Devaux
  */
 public class TokenClassifier {
