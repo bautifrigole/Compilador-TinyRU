@@ -17,11 +17,11 @@ import static compiler.Utils.areTheSameTokenLists;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Clase para ejecutar tests con JUnit relacionados a cadenas.
+ * @author Francisco Devaux
+ */
 class StringTests {
-    /**
-     * Clase para ejecutar tests con JUnit relacionados a cadenas.
-     * @author Francisco Devaux
-     */
 
     @Test
     @DisplayName("ERROR: Invalid symbol in string Test")

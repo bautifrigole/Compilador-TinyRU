@@ -15,11 +15,11 @@ import static compiler.Utils.areTheSameTokenLists;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Clase para ejecutar tests con JUnit relacionados a operadores.
+ * @author Francisco Devaux
+ */
 class OperatorsTests {
-    /**
-     * Clase para ejecutar tests con JUnit relacionados a operadores.
-     * @author Francisco Devaux
-     */
     @Test
     @DisplayName("ERROR: Incomplete double operators Test")
     void incompleteDoubleOperatorsTest() {

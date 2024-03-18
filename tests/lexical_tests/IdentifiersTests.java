@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import static compiler.Utils.areTheSameTokenLists;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Clase para ejecutar tests con JUnit relacionados a identificadores.
+ * @author Francisco Devaux
+ */
 class IdentifiersTests {
-    /**
-     * Clase para ejecutar tests con JUnit relacionados a identificadores.
-     * @author Francisco Devaux
-     */
     @Test
     @DisplayName("ERROR: Invalid class identifier (Ends in underscore) Test")
     void invalidClassIdentifierTest1() {

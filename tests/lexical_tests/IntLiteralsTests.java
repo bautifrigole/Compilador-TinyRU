@@ -14,11 +14,11 @@ import static compiler.Utils.areTheSameTokenLists;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Clase para ejecutar tests con JUnit relacionados a números enteros.
+ * @author Francisco Devaux
+ */
 class IntLiteralsTests {
-    /**
-     * Clase para ejecutar tests con JUnit relacionados a números enteros.
-     * @author Francisco Devaux
-     */
 
     @Test
     @DisplayName("ERROR: Incorrect formation of int literal Test")

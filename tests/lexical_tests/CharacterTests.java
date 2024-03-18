@@ -18,11 +18,11 @@ import static compiler.Utils.areTheSameTokenLists;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Clase para ejecutar tests con JUnit relacionados a caracteres.
+ * @author Francisco Devaux
+ */
 class CharacterTests {
-    /**
-     * Clase para ejecutar tests con JUnit relacionados a caracteres.
-     * @author Francisco Devaux
-     */
     @Test
     @DisplayName("ERROR: Empty character Test")
     void emptyCharTest() {

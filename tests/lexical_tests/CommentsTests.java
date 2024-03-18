@@ -15,11 +15,11 @@ import static compiler.Utils.areTheSameTokenLists;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Clase para ejecutar tests con JUnit relacionados a comentarios.
+ * @author Francisco Devaux
+ */
 class CommentsTests {
-    /**
-     * Clase para ejecutar tests con JUnit relacionados a comentarios.
-     * @author Francisco Devaux
-     */
     @Test
     @DisplayName("EndOfFile after comment Test")
     void endOfFileAfterCommentTest() throws LexicalException, FileNotFoundException {
