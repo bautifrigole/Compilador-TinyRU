@@ -1,6 +1,7 @@
 package compiler.lexical_analyzer.reader;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Scanner;
  * @author Bautista Frigolé y Francisco Devaux
  */
 public class FileReader extends Reader {
-    private Scanner scanner;
+    private final Scanner scanner;
     private String line = "";
 
     /**
@@ -16,14 +17,11 @@ public class FileReader extends Reader {
      * @author Francisco Devaux
      * @param path String con la ruta hacia el archivo fuente
      */
-    public FileReader(String path) {
-        try {
-            File file = new File(path);
-            scanner = new Scanner(file);
+    public FileReader(String path) throws FileNotFoundException {
+        File file = new File(path);
+        scanner = new Scanner(file);
+        if (scanner.hasNextLine()) {
             this.line = scanner.nextLine();
-        }
-        catch (Exception e) {
-            System.out.println("File not found");
         }
     }
 

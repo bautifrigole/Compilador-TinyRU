@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static compiler.Utils.areTheSameTokenLists;
@@ -71,8 +72,8 @@ class CharacterTests {
 
     @Test
     @DisplayName("Verification of correct characters Test")
-    void validDifferentCharacters() throws LexicalException {
-        ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
+    void validDifferentCharacters() throws LexicalException, FileNotFoundException {
+        ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "n", 0, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "\\" + "n", 1, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_CHAR, "a", 2, 0));

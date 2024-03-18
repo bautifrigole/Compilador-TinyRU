@@ -8,6 +8,7 @@ import compiler.lexical_analyzer.TokenID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static compiler.Utils.areTheSameTokenLists;
@@ -18,7 +19,7 @@ class CommentsTests {
 
     @Test
     @DisplayName("EndOfFile after comment Test")
-    void validKWStructsTypesTest() throws LexicalException {
+    void validKWStructsTypesTest() throws LexicalException, FileNotFoundException {
         ArrayList<LexerToken> tokens = new ArrayList<>();
 
         assertTrue(areTheSameTokenLists(tokens, Executor.getAllTokensFromPath("tests/lexical_tests/comments/EOFAfterComment.ru")));
@@ -40,8 +41,8 @@ class CommentsTests {
 
     @Test
     @DisplayName("Comment ignored correctly Test")
-    void ValidCommentIgnoreTest() throws LexicalException {
-        ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
+    void ValidCommentIgnoreTest() throws LexicalException, FileNotFoundException {
+        ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_STR, "hola", 0, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_STR, "que tal", 1, 0));
 

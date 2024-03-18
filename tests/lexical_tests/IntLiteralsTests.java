@@ -7,6 +7,7 @@ import compiler.lexical_analyzer.TokenID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static compiler.Utils.areTheSameTokenLists;
@@ -39,8 +40,8 @@ class IntLiteralsTests {
 
     @Test
     @DisplayName("Verification of correct int identification Test 1")
-    void validIntTest1() throws LexicalException {
-        ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
+    void validIntTest1() throws LexicalException, FileNotFoundException {
+        ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_INT, "45678", 0, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_SEMICOLON, ";", 0, 5));
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_INT, "123123", 1, 0));
@@ -52,8 +53,8 @@ class IntLiteralsTests {
 
     @Test
     @DisplayName("Verification of correct int identification Test 2")
-    void validIntTest2() throws LexicalException {
-        ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
+    void validIntTest2() throws LexicalException, FileNotFoundException {
+        ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_INT, "2147483646", 0, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_SEMICOLON, ";", 0, 10));
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_INT, "123123", 1, 0));

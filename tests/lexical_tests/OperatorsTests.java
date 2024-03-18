@@ -1,6 +1,5 @@
 package lexical_tests;
 
-import compiler.exceptions.lexical_exceptions.EmptyCharException;
 import compiler.exceptions.lexical_exceptions.LexicalException;
 import compiler.exceptions.lexical_exceptions.MissingOperationCharacter;
 import compiler.lexical_analyzer.Executor;
@@ -9,6 +8,7 @@ import compiler.lexical_analyzer.TokenID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static compiler.Utils.areTheSameTokenLists;
@@ -26,8 +26,8 @@ class OperatorsTests {
 
     @Test
     @DisplayName("Verification of correct Key Words, Predefined Structures and Types Test")
-    void validDoubleOperatorsTest() throws LexicalException {
-        ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
+    void validDoubleOperatorsTest() throws LexicalException, FileNotFoundException {
+        ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_OP_AND, "&&", 0, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_OP_OR, "||", 1, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_OP_EQ, "==", 2, 0));
@@ -44,8 +44,8 @@ class OperatorsTests {
 
     @Test
     @DisplayName("Verification of correct Key Words, Predefined Structures and Types Test")
-    void validSingleOperatorTest() throws LexicalException {
-        ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
+    void validSingleOperatorTest() throws LexicalException, FileNotFoundException {
+        ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_OP_PLUS, "+", 0, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_OP_MINUS, "-", 1, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_OP_MULT, "*", 2, 0));

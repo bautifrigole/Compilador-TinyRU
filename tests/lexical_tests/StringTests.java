@@ -10,6 +10,7 @@ import compiler.lexical_analyzer.TokenID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static compiler.Utils.areTheSameTokenLists;
@@ -63,7 +64,7 @@ class StringTests {
 
     @Test
     @DisplayName("Valid string Test")
-    void validStringTest() throws LexicalException {
+    void validStringTest() throws LexicalException, FileNotFoundException {
         ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_LITERAL_STR, "hola que tal", 0, 0));
         assertTrue(areTheSameTokenLists(tokens, Executor.getAllTokensFromPath("tests/lexical_tests/string/validStringOutput.ru")));

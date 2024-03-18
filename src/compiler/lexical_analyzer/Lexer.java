@@ -57,7 +57,7 @@ public class Lexer {
         Character ch = reader.getCurrentChar();
 
         if (ch == null) {
-            return new LexerToken(TokenID.TOKEN_EOF, (String) null,
+            return new LexerToken(TokenID.TOKEN_EOF, null,
                     reader.getCurrentLine(), lexemeStartingColumn);
         }
 
@@ -114,7 +114,7 @@ public class Lexer {
                 }
 
                 if (ch == null) {
-                    return new LexerToken(TokenID.TOKEN_EOF, (String) null,
+                    return new LexerToken(TokenID.TOKEN_EOF, null,
                             reader.getCurrentLine(), lexemeStartingColumn);
                 }
             }
@@ -133,8 +133,7 @@ public class Lexer {
         Character ch = reader.getCurrentChar();
         reader.nextChar();
         TokenID tokenID = TokenClassifier.getTokenCharID(ch);
-        return new LexerToken(tokenID, ch.toString(),
-                reader.getCurrentLine(), lexemeStartingColumn);
+        return new LexerToken(tokenID, ch.toString(), reader.getCurrentLine(), lexemeStartingColumn);
     }
 
     /**
@@ -280,9 +279,8 @@ public class Lexer {
      * @throws LexicalException {@link LexicalException}.
      */
     private LexerToken getCharLiteralLexerToken() throws LexicalException {
-        Character ch;
         reader.nextChar();
-        ch = reader.getCurrentChar();
+        Character ch = reader.getCurrentChar();
         if (ch == null) {
             throw new UnclosedCharException(reader.getCurrentLine(), lexemeStartingColumn);
         }
@@ -309,7 +307,7 @@ public class Lexer {
         reader.nextChar();
         ch = reader.getCurrentChar();
 
-        if (ch != '\'') {
+        if (ch == null || ch != '\'') {
             throw new UnclosedCharException(reader.getCurrentLine(), lexemeStartingColumn);
         }
 

@@ -7,6 +7,7 @@ import compiler.lexical_analyzer.TokenID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static compiler.Utils.areTheSameTokenLists;
@@ -45,8 +46,8 @@ class IdentifiersTests {
 
     @Test
     @DisplayName("Verification of correct identifiers Test")
-    void validIntTest() throws LexicalException {
-        ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
+    void validIntTest() throws LexicalException, FileNotFoundException {
+        ArrayList<LexerToken> tokens = new ArrayList<>();
         tokens.add(new LexerToken(TokenID.TOKEN_ID_CLASS, "Holahola", 0, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_ID_CLASS, "HoLALSASD", 1, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_ID_CLASS, "Hola_HOLA", 2, 0));

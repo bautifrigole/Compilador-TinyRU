@@ -1,19 +1,16 @@
 package lexical_tests;
 
-import compiler.exceptions.lexical_exceptions.CannotResolveSymbolException;
-import compiler.exceptions.lexical_exceptions.EmptyCharException;
 import compiler.exceptions.lexical_exceptions.LexicalException;
-import compiler.exceptions.lexical_exceptions.UnclosedCharException;
 import compiler.lexical_analyzer.Executor;
 import compiler.lexical_analyzer.LexerToken;
 import compiler.lexical_analyzer.TokenID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static compiler.Utils.areTheSameTokenLists;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class KWStructsTypesTests {
@@ -21,7 +18,7 @@ class KWStructsTypesTests {
 
     @Test
     @DisplayName("Verification of correct Key Words, Predefined Structures and Types Test")
-    void validKWStructsTypesTest() throws LexicalException {
+    void validKWStructsTypesTest() throws LexicalException, FileNotFoundException {
         ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
         tokens.add(new LexerToken(TokenID.TOKEN_KW_STRUCT, "struct", 0, 0));
         tokens.add(new LexerToken(TokenID.TOKEN_KW_IMPL, "impl", 1, 0));

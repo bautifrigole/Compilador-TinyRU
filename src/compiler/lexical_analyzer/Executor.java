@@ -4,6 +4,7 @@ import compiler.exceptions.lexical_exceptions.LexicalException;
 import compiler.lexical_analyzer.reader.FileReader;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class Executor {
                 System.out.println("ERROR: ARCHIVO DE ENTRADA NO ESPECIFICADO.");
             }
         } catch (Exception e) {
-            System.out.print(e.toString());
+            System.out.print(e.getMessage());
         }
     }
 
@@ -50,7 +51,7 @@ public class Executor {
      * @return Lista de {@link LexerToken}.
      * @author Bautista Frigolé
      */
-    public static ArrayList<LexerToken> getAllTokensFromPath(String path) throws LexicalException {
+    public static ArrayList<LexerToken> getAllTokensFromPath(String path) throws LexicalException, FileNotFoundException {
         File file = new File(path);
         if (!file.exists()) {
             return null;
@@ -67,7 +68,7 @@ public class Executor {
      */
     private static ArrayList<LexerToken> getAllTokens(Lexer lexer) throws LexicalException {
         LexerToken lexerToken = lexer.getNextToken();
-        ArrayList<LexerToken> tokens = new ArrayList<LexerToken>();
+        ArrayList<LexerToken> tokens = new ArrayList<>();
 
         while (lexerToken.getTokenID() != TokenID.TOKEN_EOF) {
             tokens.add(lexerToken);
