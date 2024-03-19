@@ -254,7 +254,11 @@ public class Lexer {
                         throw new CannotResolveSymbolException(reader.getCurrentLine(),
                                 lexemeStartingColumn, '\0');
                     } else {
-                        currentLexeme.append(ch);
+
+                        if(nextCh!='"' && nextCh!='\\'){
+                            currentLexeme.append(ch);
+
+                        }
                         currentLexeme.append(nextCh);
                     }
                 }
@@ -263,12 +267,13 @@ public class Lexer {
                     throw new CannotResolveSymbolException(reader.getCurrentLine(),
                             reader.getCurrentColumn(), ch);
                 }
+                else {
+                    isStringOpen = ch != '"';
+                    if (isStringOpen) {
+                        currentLexeme.append(ch);
+                    }
+                }
             }
-        }
-
-        isStringOpen = ch != '"';
-        if (isStringOpen) {
-            currentLexeme.append(ch);
         }
     }
 
