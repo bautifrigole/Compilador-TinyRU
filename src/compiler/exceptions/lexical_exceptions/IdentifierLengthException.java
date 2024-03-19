@@ -1,7 +1,7 @@
 package compiler.exceptions.lexical_exceptions;
 
 /**
- * Excepción cuando un identificador excede su longitud máxima.
+ * Excepción cuando un identificador excede su longitud máxima (64 caracteres).
  * @author Francisco Devaux
  */
 public class IdentifierLengthException extends LexicalException {

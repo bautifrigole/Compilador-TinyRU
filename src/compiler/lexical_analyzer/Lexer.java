@@ -140,9 +140,9 @@ public class Lexer {
      * Devuelve el LexerToken formado por un token separador compuesto por dos caracteres.
      * @author Bautista Frigolé y Francisco Devaux
      * @return {@link LexerToken} con información del token.
-     * @throws MissingOperationCharacter {@link MissingOperationCharacter}.
+     * @throws MissingOperationCharacterException {@link MissingOperationCharacterException}.
      */
-    private LexerToken getDoubleLexerToken() throws MissingOperationCharacter {
+    private LexerToken getDoubleLexerToken() throws MissingOperationCharacterException {
         Character ch = reader.getCurrentChar();
         reader.nextChar();
         Character nextCh = reader.getCurrentChar();
@@ -153,7 +153,7 @@ public class Lexer {
             return new LexerToken(TokenClassifier.getTokenStrID(currentLexeme.toString()), currentLexeme.toString(),
                     reader.getCurrentLine(), lexemeStartingColumn);
         } else {
-            throw new MissingOperationCharacter(reader.getCurrentLine(), lexemeStartingColumn, ch, ch);
+            throw new MissingOperationCharacterException(reader.getCurrentLine(), lexemeStartingColumn, ch, ch);
         }
     }
 

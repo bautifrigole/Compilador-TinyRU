@@ -1,7 +1,8 @@
 package compiler.exceptions.lexical_exceptions;
 
 /**
- * Excepción cuando un identificador contiene un carácter inválido.
+ * Excepción cuando un identificador se encuentra formado de manera incorrecta.
+ * Ejemplo: _hola
  * @author Bautista Frigolé
  */
 public class InvalidIdentifierException extends LexicalException {

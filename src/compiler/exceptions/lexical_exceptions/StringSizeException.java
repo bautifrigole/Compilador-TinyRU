@@ -1,7 +1,7 @@
 package compiler.exceptions.lexical_exceptions;
 
 /**
- * Excepción cuando un lexema de tipo String excede su longitud máxima.
+ * Excepción cuando un lexema de tipo String excede su longitud máxima (1024 caracteres).
  * @author Francisco Devaux
  */
 public class StringSizeException extends LexicalException {

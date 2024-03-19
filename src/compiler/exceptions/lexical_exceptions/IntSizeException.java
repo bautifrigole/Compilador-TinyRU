@@ -1,7 +1,7 @@
 package compiler.exceptions.lexical_exceptions;
 
 /**
- * Excepción cuando un literal de tipo Int excede su valor máximo permitido.
+ * Excepción cuando un literal de tipo Int excede su valor máximo permitido (2147483647).
  * @author Francisco Devaux
  */
 public class IntSizeException extends LexicalException {

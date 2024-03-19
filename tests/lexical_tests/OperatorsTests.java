@@ -1,7 +1,7 @@
 package lexical_tests;
 
 import compiler.exceptions.lexical_exceptions.LexicalException;
-import compiler.exceptions.lexical_exceptions.MissingOperationCharacter;
+import compiler.exceptions.lexical_exceptions.MissingOperationCharacterException;
 import compiler.lexical_analyzer.Executor;
 import compiler.lexical_analyzer.LexerToken;
 import compiler.lexical_analyzer.TokenID;
@@ -23,7 +23,7 @@ class OperatorsTests {
     @Test
     @DisplayName("ERROR: Incomplete double operators Test")
     void incompleteDoubleOperatorsTest() {
-        assertThrows(MissingOperationCharacter.class,
+        assertThrows(MissingOperationCharacterException.class,
                 () -> Executor.getAllTokensFromPath("tests/lexical_tests/operators/incompleteDoubleOperator.ru"));
     }
 

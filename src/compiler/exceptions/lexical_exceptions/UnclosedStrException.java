@@ -2,6 +2,7 @@ package compiler.exceptions.lexical_exceptions;
 
 /**
  * Excepción cuando en un literal de tipo String no se cerraron comillas dobles.
+ * Ejemplo: "Hola
  * @author Bautista Frigolé
  */
 public class UnclosedStrException extends LexicalException {
