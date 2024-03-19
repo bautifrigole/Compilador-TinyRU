@@ -25,7 +25,6 @@ public class Executor {
             if (args.length > 0) {
                 ArrayList<LexerToken> tokensList = getAllTokensFromPath(args[0]);
                 if (tokensList == null) {
-                    System.out.println("ERROR: EL ARCHIVO \"" + args[0] + "\" NO EXISTE.");
                     return;
                 }
 
@@ -56,6 +55,12 @@ public class Executor {
     public static ArrayList<LexerToken> getAllTokensFromPath(String path) throws LexicalException, FileNotFoundException {
         File file = new File(path);
         if (!file.exists()) {
+            System.out.println("ERROR: EL ARCHIVO \"" + path + "\" NO EXISTE.");
+            return null;
+        }
+        String ext = path.substring(path.length()-4,path.length()-1);
+        if (!ext.equals(".ru")){
+            System.out.println("ERROR: EL ARCHIVO \"" + path + "\" NO TIENE EXTENSION \".ru\".");
             return null;
         }
         Lexer lexer = new Lexer(new FileReader(file.getPath()));
