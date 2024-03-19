@@ -417,7 +417,7 @@ public class Lexer {
             }
             if (!Character.isAlphabetic(ch) && !Character.isDigit(ch) && ch != '_') {
                 throw new InvalidIdentifierException(reader.getCurrentLine(),
-                        lexemeStartingColumn, currentLexeme.toString(), ch);
+                        reader.getCurrentColumn(), currentLexeme.toString(), ch);
             }
             reader.nextChar();
             ch = reader.getCurrentChar();
@@ -442,14 +442,14 @@ public class Lexer {
                 return TokenID.TOKEN_ID_CLASS;
             } else {
                 throw new InvalidIdentifierException(reader.getCurrentLine(),
-                        reader.getCurrentColumn(), str, lastChar);
+                        lexemeStartingColumn, str, lastChar);
             }
         }
         if (Character.isAlphabetic(firstChar)) {
             return TokenID.TOKEN_ID_OBJ;
         } else {
             throw new InvalidIdentifierException(reader.getCurrentLine(),
-                    reader.getCurrentColumn(), str, firstChar);
+                    lexemeStartingColumn, str, firstChar);
         }
     }
 
