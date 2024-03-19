@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="JavadocGenerationManager">
-    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Downloads/JavaDoc" />
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Downloads/Compilador-TinyRU-JavaDoc" />
+    <option name="OPTION_SCOPE" value="private" />
     <option name="OPTION_SEPARATE_INDEX" value="false" />
     <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="true" />
   </component>

@@ -2,7 +2,7 @@ package compiler.exceptions.lexical_exceptions;
 
 /**
  * Excepción cuando falta un caracter en un operador de doble caracter.
- * Ejemplo: & (Debe ser &&)
+ * Ejemplo: | (Debe ser ||)
  * @author Bautista Frigolé
  */
 public class MissingOperationCharacterException extends LexicalException {
