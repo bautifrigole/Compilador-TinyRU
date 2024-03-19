@@ -417,7 +417,7 @@ public class Lexer {
             }
             if (!Character.isAlphabetic(ch) && !Character.isDigit(ch) && ch != '_') {
                 throw new InvalidIdentifierException(reader.getCurrentLine(),
-                        reader.getCurrentColumn(), currentLexeme.toString(), ch);
+                        lexemeStartingColumn, currentLexeme.toString(), ch);
             }
             reader.nextChar();
             ch = reader.getCurrentChar();
