@@ -187,7 +187,7 @@ public class Lexer {
                     }
 
                     if (isInvalidCharacter(ch)) {
-                        throw new CannotResolveSymbolException(reader.getCurrentColumn(), reader.getCurrentColumn(), ch);
+                        throw new CannotResolveSymbolException(reader.getCurrentLine(), reader.getCurrentColumn(), ch);
                     }
                     reader.nextChar();
                     ch = reader.getCurrentChar();
@@ -379,6 +379,7 @@ public class Lexer {
 
         while (ch != null && !TokenSeparator.isSeparator(ch) && ch != ' ' && ch != '\n') {
             if (!Character.isDigit(ch)) {
+                currentLexeme.append(ch);
                 throw new UnexpectedCharacterException(reader.getCurrentLine(),
                         reader.getCurrentColumn(), currentLexeme.toString(), ch);
             }
