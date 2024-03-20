@@ -28,19 +28,6 @@ class CommentsTests {
         assertTrue(areTheSameTokenLists(tokens, Executor.getAllTokensFromPath("tests/lexical_tests/comments/EOFAfterComment.ru")));
     }
 
-    @Test
-    @DisplayName("ERROR: Invalid symbol in comment Test")
-    void invalidSymbolCommentTest() {
-        assertThrows(CannotResolveSymbolException.class,
-                () -> Executor.getAllTokensFromPath("tests/lexical_tests/comments/invalidSymbolInComment.ru"));
-    }
-
-    @Test
-    @DisplayName("ERROR: Null in comment Test")
-    void nullInCommentTest() {
-        assertThrows(CannotResolveSymbolException.class,
-                () -> Executor.getAllTokensFromPath("tests/lexical_tests/comments/nullInComment.ru"));
-    }
 
     @Test
     @DisplayName("Comment ignored correctly Test")

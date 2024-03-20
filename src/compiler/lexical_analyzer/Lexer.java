@@ -36,6 +36,7 @@ public class Lexer {
     private final List<Character> spanishCharacters = Arrays.asList(
             'á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú', 'ñ', 'Ñ', 'ü', 'Ü');
 
+    private final List<Character> invalidStandaloneCharacters = Arrays.asList('#','$','@','~','^','´','?');
 
     /**
      * Constructor de la clase.
@@ -74,7 +75,10 @@ public class Lexer {
                         reader.getCurrentLine(), lexemeStartingColumn);
             }
         }
-
+        if (invalidStandaloneCharacters.contains(ch)) {
+            throw new CannotResolveSymbolException(reader.getCurrentLine(),
+                    reader.getCurrentColumn(), ch);
+        }
         lexemeStartingColumn = reader.getCurrentColumn();
 
         if (TokenSeparator.singleSeparators.contains(ch)) {
@@ -371,7 +375,6 @@ public class Lexer {
      */
     private LexerToken getIntLiteralLexerToken() throws LexicalException {
         int maxIntValue = 2147483647;
-        int maxIntLength = 10;
         Character ch = reader.getCurrentChar();
 
         while (ch != null && !TokenSeparator.isSeparator(ch) && ch != ' ' && ch != '\n') {
@@ -381,7 +384,7 @@ public class Lexer {
                         reader.getCurrentColumn(), currentLexeme.toString(), ch);
             }
             currentLexeme.append(ch);
-            if (currentLexeme.toString().length() > maxIntLength || Long.parseLong(currentLexeme.toString()) > maxIntValue) {
+            if (Long.parseLong(currentLexeme.toString()) > maxIntValue) {
                 throw new IntSizeException(reader.getCurrentLine(), lexemeStartingColumn);
             }
             reader.nextChar();
@@ -404,6 +407,10 @@ public class Lexer {
         int maxIdentifierLength = 64;
         while (ch != null && !TokenSeparator.isSeparator(ch) && ch != ' ' && ch != '\n') {
             currentLexeme.append(ch);
+            if(spanishCharacters.contains(ch)){
+                throw new InvalidIdentifierException(reader.getCurrentLine(),
+                        reader.getCurrentColumn(), currentLexeme.toString(), ch);
+            }
             if (currentLexeme.length() > maxIdentifierLength) {
                 throw new IdentifierLengthException(reader.getCurrentLine(), lexemeStartingColumn);
             }
