@@ -46,7 +46,7 @@ public class Executor {
                                 try {
                                     ArrayList<LexerToken> tokensList = getAllTokensFromPath(file.getPath());
                                     if (tokensList != null) {
-                                        System.out.println("SIN ERRORES :)\n");
+                                        System.out.println("SIN ERRORES EN \"" + file.getPath() + "\"\n");
                                     }
                                 } catch (Exception e) {
                                     System.out.println("EXCEPCION EN EL ARCHIVO \"" + file.getPath() + "\": " + e.getMessage() + "\n");

@@ -173,22 +173,14 @@ public class Lexer {
             currentLexeme.append(nextCh);
 
             if (currentLexeme.toString().equals("/?")) {
-
                 reader.nextChar();
                 ch = reader.getCurrentChar();
                 while (ch != null && ch != '\n') {
-                    if (ch == '\\') {
-                        reader.nextChar();
-                        ch = reader.getCurrentChar();
-                        if (ch != null && ch == '0') {
-                            throw new CannotResolveSymbolException(reader.getCurrentLine(),
-                                    reader.getCurrentColumn(), '\0');
-                        }
+                    if (ch == '\0') {
+                        throw new CannotResolveSymbolException(reader.getCurrentLine(),
+                                reader.getCurrentColumn(), '\0');
                     }
 
-                    if (isInvalidCharacter(ch)) {
-                        throw new CannotResolveSymbolException(reader.getCurrentLine(), reader.getCurrentColumn(), ch);
-                    }
                     reader.nextChar();
                     ch = reader.getCurrentChar();
                 }
@@ -460,6 +452,6 @@ public class Lexer {
      */
     private boolean isInvalidCharacter(Character ch) {
         int asciiCode = (int) ch;
-        return !((asciiCode >= 32 && asciiCode <= 126) || spanishCharacters.contains(ch));
+        return !((asciiCode >= 32 && asciiCode <= 126) || asciiCode == '\t' || spanishCharacters.contains(ch));
     }
 }
