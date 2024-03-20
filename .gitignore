@@ -36,3 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Carpeta compartida de tests ###
+tiny-ru-tests/
