@@ -23,18 +23,39 @@ public class Executor {
     public static void main(String[] args) {
         try {
             if (args.length > 0) {
-                ArrayList<LexerToken> tokensList = getAllTokensFromPath(args[0]);
-                if (tokensList == null) {
-                    return;
+                File inputFile = new File(args[0]);
+                if (!inputFile.isDirectory()) {
+                    ArrayList<LexerToken> tokensList = getAllTokensFromPath(args[0]);
+                    if (tokensList == null) {
+                        return;
+                    }
+                    if (args.length > 1) {
+                        File outputFile = new File(args[1]);
+                        outputFile.createNewFile();
+                        FileWriter writer = new FileWriter(args[1]);
+                        writeTokenTable(writer, tokensList);
+                    } else {
+                        printTokenTable(tokensList);
+                    }
                 }
-
-                if (args.length > 1) {
-                    File outputFile = new File(args[1]);
-                    outputFile.createNewFile();
-                    FileWriter writer = new FileWriter(args[1]);
-                    writeTokenTable(writer, tokensList);
-                } else {
-                    printTokenTable(tokensList);
+                else{
+                    File[] files = inputFile.listFiles();
+                    if (files != null && files.length > 0) {
+                        for (File file : files) {
+                            if (file.isFile()) {
+                                try {
+                                    ArrayList<LexerToken> tokensList = getAllTokensFromPath(file.getPath());
+                                    if (tokensList != null) {
+                                        System.out.println("SIN ERRORES :)\n");
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("EXCEPCION EN EL ARCHIVO \"" + file.getPath() + "\": " + e.getMessage() + "\n");
+                                }
+                            }
+                        }
+                    } else {
+                        System.out.println("ERROR: CARPETA VACIA.");
+                    }
                 }
             } else {
                 System.out.println("ERROR: ARCHIVO DE ENTRADA NO ESPECIFICADO.");
@@ -58,7 +79,7 @@ public class Executor {
             System.out.println("ERROR: EL ARCHIVO \"" + path + "\" NO EXISTE.");
             return null;
         }
-        String ext = path.substring(path.length()-4,path.length()-1);
+        String ext = path.substring(path.length()-3);
         if (!ext.equals(".ru")){
             System.out.println("ERROR: EL ARCHIVO \"" + path + "\" NO TIENE EXTENSION \".ru\".");
             return null;
